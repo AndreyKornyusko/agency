@@ -1,0 +1,26 @@
+@import '../../../variables.scss';
+@import '../../../mixins.scss';
+
+
+.avatar, .dropAvatar {
+  display: block;
+  width: rem(40);
+  height: rem(40);
+  border-radius: 50%;
+}
+
+.dropAvatar {
+  width: rem(67);
+  height:rem(67);
+
+}
+
+.avatar {
+  display: none;
+  margin-right: rem(14);
+
+  @media screen and (min-width: 1024px) {
+    display: block;
+  }
+}
+

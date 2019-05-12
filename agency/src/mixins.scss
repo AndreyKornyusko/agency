@@ -1,0 +1,49 @@
+@import './variables.scss';
+
+
+@mixin content-container {
+   
+    min-width: rem(290);
+    max-width: rem(1170);
+    width: 90.625%;
+    margin: 0 auto;
+
+    @media screen and (min-width: 768px) {
+      width: 93.75%;
+    }
+
+    @media screen and (min-width: 1024px) {
+      width: 90.8203125%;
+    }
+
+    @media screen and (min-width: 2560px) {
+      width: 44.53125%;
+    }
+}
+
+@mixin h2($color) {
+  max-width: rem(290);
+  max-height: rem(60);
+  margin: 0 auto;
+  color: $color;
+  font-family: 'Overpass';
+  font-size: rem(26);
+  font-weight: 400;
+  // line-height: rem(26);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media screen and (min-width: 768px) {
+    max-width: rem(720);
+    max-height: rem(100);
+
+    font-size: rem(42);
+  }
+  @media screen and (min-width: 1024px) {
+    max-width: rem(930);
+  }
+
+  @media screen and (min-width: 2560px) {
+    max-width: rem(1140);
+  }
+}

@@ -1,0 +1,82 @@
+@import '../../variables.scss';
+@import '../../mixins.scss';
+
+.contentContainer {
+  @include content-container;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  cursor: pointer;
+  width: rem(134);
+  height: rem(24);
+  margin: 0;
+  padding: 0;
+}
+
+
+.header {
+  width: 100%;
+  min-height: rem(64);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: $background-color;
+  padding-top: rem(18);
+  padding-bottom: rem(20);
+  @media screen and (min-width: 1024px) {
+    padding: 0;
+  }
+}
+
+.usermenu {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 3;
+}
+
+.list {
+  display: none;
+  list-style: none;
+  flex-grow: 7;
+  margin: 0;
+  padding: 0;
+  @media screen and (min-width: 1024px) {
+    display: flex;
+    justify-content: center;
+    margin-right: rem(52);
+  }
+  @media screen and (min-width: 2560px) {
+    margin-right: rem(25);
+
+  }
+}
+
+
+
+.link {
+  text-decoration: none;
+  color: #000000;
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.item {
+  color: #000000;
+  font-family: 'Source Sans Pro';
+  font-size: rem(16);
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 63px;
+  margin-right: rem(15);
+  margin-left: rem(15);
+
+}
+
+

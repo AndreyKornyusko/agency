@@ -1,0 +1,24 @@
+// 1rem = 10px
+:root {
+  font-size: 62.5%;
+}
+
+$remWidth: 1rem;
+@function rem($n) {
+  @return $n / 10 * $remWidth;
+}
+
+$primary-color: #ef6c00;
+$primary-color-button-hover: #fc831f;
+$primary-button-color:#ec6b0e;
+$primary-button-bgcolor:#fee6d2;
+$primary-button-disabled-color:#d7d7d7;
+$primary-button-disabled-text-color:#8d8c8c;
+$secondary-color: #283593;
+$background-color: #fff;
+$footer-bg-color:#2b3191;
+$primary-dark-title-color: #000000;
+$primary-light-title-color: #fff;
+$primary-dark-text-color:#4c4b4b;
+$primary-light-text-color:#fefefe;
+

@@ -1,0 +1,29 @@
+@import '../../variables.scss';
+
+.button {
+  width: rem(290);
+  height: rem(40);
+  border-radius: rem(4);
+  margin: 0 auto;
+  border: 2px solid $primary-button-color;
+  background-color: $background-color;
+  color: $primary-button-color;
+  font-family: 'Source Sans Pro';
+  font-size: rem(20);
+  font-weight: bold;
+  cursor: pointer;
+  &:hover {
+    background-color: $primary-button-bgcolor;
+    color: $primary-color-button-hover;
+    border: 2px solid $primary-color-button-hover;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.button[disabled] {
+  background-color: $primary-button-disabled-color;
+  color: $primary-button-disabled-text-color;
+  border: none;
+}

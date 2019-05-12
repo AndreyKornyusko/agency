@@ -1,0 +1,20 @@
+@import '../../variables.scss';
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0 ,0 ,0.2);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.modal {
+  width: 78.125%;
+  min-width: rem(250);
+  min-height: 100vh;
+  background-color: #fff;
+}

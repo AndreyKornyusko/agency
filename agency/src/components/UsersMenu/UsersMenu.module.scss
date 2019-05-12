@@ -1,0 +1,139 @@
+@import '../../mixins.scss';
+@import '../../variables.scss';
+
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  // max-height: 631px;
+  overflow: hidden;
+  padding: 0;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    // max-height: 100000000000px;
+    margin-bottom: 21px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    justify-content: flex-start;
+    margin-bottom: 47px;
+
+  }
+}
+
+.listItem {
+  width: 100%;
+  list-style: none;
+  margin-bottom: 26px;
+  @media screen and (min-width: 768px) {
+    width: 31%;
+    margin-bottom: 34px;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 31%;
+    margin-right: 32px;
+    margin-bottom: 75px;
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+    &:nth-last-child(3) {
+      margin-bottom: 0;
+    }
+    &:nth-last-child(2) {
+      margin-bottom: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  @media screen and (min-width: 2560px) {
+    margin-right: 36px;
+    margin-bottom: 52px;
+  }
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  width: 100%;
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    text-align: left;
+  }
+}
+.imgWrap {
+  margin-bottom: 15px;
+  border:none;
+  @media screen and (min-width: 1024px) {
+    margin-right: 8px;
+  }
+}
+.image {
+  display: block;
+  border-radius: 50%;
+  width: rem(70);
+  height: rem(70);
+  background-color: #000000;
+  border:none;
+}
+.contentWrap {
+  @media screen and (min-width: 1024px) {
+    padding-top: 25px;
+  }
+}
+.name {
+  display: block;
+  max-width: rem(245);
+  margin: 0 auto;
+  padding: 0;
+  margin-bottom: 5px;
+  color: $primary-dark-text-color;
+  font-family: 'Overpass';
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media screen and (min-width: 1024px) {
+    text-align: left;
+    margin: 0;
+    margin-bottom: 13px;
+  }
+}
+.position,
+.email,
+.phone {
+  display: block;
+  max-width: rem(290);
+  margin: 0 auto;
+  padding: 0;
+  color: $primary-dark-text-color;
+  font-family: 'Source Sans Pro';
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media screen and (min-width: 1024px) {
+    text-align: left;
+    margin: 0;
+  }
+}
+
+
+.email {
+  white-space: nowrap;
+}
+.phone {
+  line-height: 26px;
+}

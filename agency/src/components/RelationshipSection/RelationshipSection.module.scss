@@ -1,0 +1,155 @@
+@import '../../mixins.scss';
+@import '../../variables.scss';
+
+.htmsSvg,
+.cssSvg {
+  width: rem(88);
+  height: rem(99);
+  @media screen and (min-width: 1024px) {
+    width: rem(98);
+    height: rem(111);
+  }
+}
+
+.javascriptSvg {
+  width: rem(90);
+  height: rem(103);
+  @media screen and (min-width: 1024px) {
+    width: rem(100);
+    height: rem(114);
+  }
+}
+
+.section {
+  width: 100%;
+  padding-top: rem(66);
+  padding-bottom: rem(46);
+  @media screen and (min-width: 768px) {
+    padding-top: rem(135);
+    padding-bottom: rem(67);
+  }
+  @media screen and (min-width: 1024px) {
+    padding-top: rem(125);
+    padding-bottom: rem(135);
+  }
+  @media screen and (min-width: 2560px) {
+    padding-top: rem(77);
+    padding-bottom: rem(138);
+  }
+}
+
+.container {
+  @include content-container;
+  & .contentWrap:last-child {
+    margin-right: 0;
+  }
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: rem(64);
+  }
+  @media screen and (min-width: 1024px) {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0;
+  }
+}
+
+.contentWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &:nth-last-child(2) {
+    @media screen and (min-width: 768px) {
+      margin-bottom: rem(21);
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: rem(27);
+  }
+  @media screen and (min-width: 1024px) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+    margin-right: rem(28);
+  }
+}
+
+.partWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  @media screen and (min-width: 768px) {
+    align-items: flex-start;
+  }
+}
+
+.title {
+  @include h2($primary-dark-title-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: rem(31);
+  @media screen and (min-width: 768px) {
+    max-width: rem(540);
+    margin-bottom: rem(48);
+  }
+}
+
+.imgWrap {
+  margin-bottom: rem(14);
+  @media screen and (min-width: 768px) {
+    margin-right: rem(35);
+  }
+  @media screen and (min-width: 768px) {
+    margin-bottom: rem(25);
+  }
+}
+
+.partTitle {
+  max-width: rem(290);
+  max-height: rem(22);
+  margin: 0;
+  margin-bottom: rem(4);
+  color: $primary-dark-title-color;
+  font-family: 'Overpass';
+  font-size: rem(22);
+  font-weight: 600;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media screen and (min-width: 768px) {
+    max-height: rem(29);
+    font-size: rem(26);
+    text-align: left;
+    margin-bottom: rem(7);
+  }
+}
+
+.content {
+  max-width: rem(280);
+  max-height: rem(300);
+  margin: 0;
+  margin-bottom: rem(26);
+  color: $primary-dark-text-color;
+  font-family: 'Source Sans Pro';
+  font-size: rem(16);
+  font-weight: 400;
+  line-height: rem(22);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media screen and (min-width: 768px) {
+    max-width: rem(470);
+    text-align: left;
+  }
+  @media screen and (min-width: 1024px) {
+    margin-bottom: 0;
+  }
+}

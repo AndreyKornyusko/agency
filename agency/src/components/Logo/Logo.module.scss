@@ -1,0 +1,25 @@
+@import '../../variables.scss';
+
+.logoLink {
+  display: block;
+  flex-grow: 2;
+  margin: 0;
+  padding: 0;
+}
+
+.icon {
+  cursor: pointer;
+  width: rem(134);
+  height: rem(24);
+  margin: 0;
+  padding: 0;
+}
+
+.svgWrap {
+  width: rem(134);
+  height: rem(24);
+  margin: 0;
+  padding: 0;
+
+}
+
