@@ -1,5 +1,3 @@
-import routes from './routes';
-
 export default [
   {
     name: 'About me',

@@ -1,0 +1,208 @@
+@import '../../mixins.scss';
+@import '../../variables.scss';
+
+.form {
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+.formWrap {
+  width: 100%;
+  margin-bottom: rem(64);
+  @media screen and (min-width: 768px) {
+    margin-bottom: rem(23);
+  }
+}
+
+.inputWrap,
+.selectWrap {
+  width: 100%;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+input,
+select,
+.uploadLabel {
+  width: rem(290);
+  height: rem(56);
+  margin: 0;
+  margin-bottom: rem(20);
+  padding: 0;
+  border-radius: rem(4);
+  border: 1px solid #b7b7b7;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+select,
+.uploadLabel {
+  display: block;
+  position: relative;
+  border-radius: 4px;
+  border: 1px solid #b7b7b7;
+  color: #8d8c8c;
+  font-family: 'Source Sans Pro';
+  font-size: rem(16);
+  line-height: rem(56);
+  font-weight: 400;
+  padding-left: rem(16);
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'] {
+  @media screen and (min-width: 768px) {
+    width: rem(220);
+  }
+  @media screen and (min-width: 1024px) {
+    width: rem(290);
+  }
+  @media screen and (min-width: 2560px) {
+    width: rem(360);
+  }
+}
+
+.nameLabel,
+.mailLabel,
+.phoneLabel {
+  position: relative;
+  display: block;
+  margin-bottom: rem(35);
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: rem(40);
+  }
+}
+
+.nameLabel::before,
+.mailLabel::before,
+.phoneLabel::before {
+  display: block;
+  position: absolute;
+  top: rem(-6);
+  left: rem(15);
+  padding: 0 rem(2);
+  content: '';
+  height: rem(12);
+  color: #8d8c8c;
+  background-color: #fff;
+  font-family: 'Source Sans Pro';
+  font-size: rem(12);
+  font-weight: 400;
+  z-index: 10;
+}
+
+.nameLabel::before {
+  content: 'Name';
+}
+
+.mailLabel::before {
+  content: 'Email';
+}
+
+.phoneLabel::before {
+  content: 'Phone';
+}
+input[type='file'] {
+  display: none;
+}
+
+.uploadLabel {
+  display: block;
+  cursor: pointer;
+  @media screen and (min-width: 768px) {
+    width: rem(345);
+  }
+  @media screen and (min-width: 1024px) {
+    width: rem(450);
+  }
+  @media screen and (min-width: 2560px) {
+    width: rem(555);
+  }
+}
+
+.uploadLabel::after {
+  display: block;
+  position: absolute;
+  max-width: rem(224);
+  height: rem(27);
+  content: 'File format jpg up to 5 MB, the minimum size of 70x70px';
+  bottom: rem(-32);
+  color: #8d8c8c;
+  font-family: 'Source Sans Pro';
+  font-size: rem(12);
+  font-weight: 400;
+  line-height: rem(14);
+  @media screen and (min-width: 768px) {
+    max-width: rem(286);
+  }
+}
+
+.uploadText {
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: block;
+    color: $primary-color;
+    font-family: 'Source Sans Pro';
+    font-size: rem(20);
+    font-weight: 700;
+  }
+}
+
+.uploadIconWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: rem(-1);
+  right: rem(-1);
+  width: rem(56);
+  height: rem(56);
+  border-radius: 0 4px 4px 0;
+  border: 2px solid $primary-button-color;
+  z-index: 10;
+  @media screen and (min-width: 768px) {
+    width: rem(130);
+  }
+}
+
+.uploadSvg {
+  width: rem(20);
+  height: rem(24);
+  fill: $primary-button-color;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+}
+
+.select {
+  margin-bottom: rem(35);
+  @media screen and (min-width: 768px) {
+    width: rem(345);
+  }
+  @media screen and (min-width: 1024px) {
+    width: rem(450);
+  }
+  @media screen and (min-width: 2560px) {
+    width: rem(555);
+  }
+}
+
+input {
+  border: 1px solid #b7b7b7;
+}
+
+input:focus:required:invalid {
+  border: 2px solid red;
+}
+input:required:valid {
+  border: 1px solid #b7b7b7;
+}

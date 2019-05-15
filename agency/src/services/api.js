@@ -6,11 +6,10 @@ const getUsers = baseURL => {
       return response.json();
     })
     .then(function(data) {
-      console.log('data', data);
+      // console.log('data', data);
       if (data.success) return data;
     })
     .catch(error => {
-      // catch обрабатывает возможную ошибку запроса
       console.error('Error: ', error);
     });
 };
@@ -36,7 +35,6 @@ const getToken = () => {
       return response.json();
     })
     .then(function(dataToken) {
-      // console.log('dataToken', dataToken);
       return dataToken.token;
     })
     .catch(function(error) {
@@ -52,8 +50,11 @@ const getPositions = () => {
       return response.json();
     })
     .then(function(data) {
-      console.log('positions', data);
+      // console.log('positions', data);
       return data;
+    })
+    .catch(function(error) {
+      console.error('Error: ', error);
     });
 };
 
@@ -64,17 +65,6 @@ const PostUser = (position_id, name, email, phone, photo, token) => {
   formData.append('email', email);
   formData.append('phone', phone);
   formData.append('photo', photo);
-
-  // var fileField = document.querySelector('input[type="file"]');
-  // formData.append('position_id', 3);
-  // formData.append('name', 'Iron Man');
-  // formData.append('email', 'Hron@gmail.com');
-  // formData.append('phone', '+380955388486');
-  // formData.append('photo', fileField.files[0]);
-  
-
-  console.log('formData', formData)
-
   return fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users', {
     method: 'POST',
     body: formData,
@@ -88,13 +78,13 @@ const PostUser = (position_id, name, email, phone, photo, token) => {
     .then(function(postData) {
       console.log('postData', postData);
       if (postData.success) {
-        // process success response
+        return postData
       } else {
-        // proccess server errors
+        console.log('User did not post')
       }
     })
     .catch(function(error) {
-      // proccess network errors
+      console.error('Error: ', error);
     });
 };
 
