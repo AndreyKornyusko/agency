@@ -12,32 +12,32 @@ const charactersMaxlimit = {
 };
 
 export default class SignUpSection extends Component {
-  state = {
-    positions: [{ id: 1, name: 'Select your position', selected: false }],
-  };
+  // state = {
+  //   positions: [{ id: 1, name: 'Select your position', selected: false }],
+  // };
 
   componentDidMount() {
-    API.getPositions()
-      .then(data => data.positions)
-      .then(data => {
-        this.setState({ positions: [...data] });
-      });
+    // API.getPositions()
+    //   .then(data => data.positions)
+    //   .then(data => {
+    //     this.setState({ positions: [...data] });
+    //   });
   }
 
-  resetThenSet = id => {
-    let temp = this.state.positions;
-    // console.log('temp', temp);
-    temp.forEach(item => (item.selected = false));
-    // console.log('temp.1', temp[0]);
-    temp[Number(id) - 1].selected = true;
-    this.setState({
-      positions: temp,
-    });
-  };
+  // resetThenSet = id => {
+  //   let temp = this.state.positions;
+  //   // console.log('temp', temp);
+  //   temp.forEach(item => (item.selected = false));
+  //   // console.log('temp.1', temp[0]);
+  //   temp[Number(id) - 1].selected = true;
+  //   this.setState({
+  //     positions: temp,
+  //   });
+  // };
 
   render() {
-    const { positions } = this.state;
-    console.log('state positions', positions);
+    // const { positions } = this.state;
+    // console.log('state positions', positions);
     const {
       isDisabled,
       handleSubmit,
@@ -47,8 +47,11 @@ export default class SignUpSection extends Component {
       email,
       phone,
       position_id,
+      positions,
       photo,
       enable,
+      resetThenSet,
+      currentPosition
     } = this.props;
 
     return (
@@ -80,9 +83,12 @@ export default class SignUpSection extends Component {
             positions={positions}
             enable={enable}
             isDisabled={isDisabled}
-            positions={positions}
-            currentPosition={positions[0].name}
-            resetThenSet={this.resetThenSet}
+            // currentPosition={positions[0].name}
+            currentPosition={currentPosition}
+
+            // resetThenSet={this.resetThenSet}
+            resetThenSet={resetThenSet}
+
           />
         </div>
       </section>

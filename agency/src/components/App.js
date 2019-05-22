@@ -16,6 +16,8 @@ const INITIAL_STATE = {
   name: '',
   email: '',
   position_id: 1,
+  positions: [{ id: 1, name: 'Select your position', selected: false }],
+
   phone: '',
   photo: '',
   baseUrl:
@@ -45,11 +47,28 @@ class App extends Component {
     API.getToken().then(data => {
       this.setState({ token: data });
     });
+
+    API.getPositions()
+    .then(data => data.positions)
+    .then(data => {
+      this.setState({ positions: [...data] });
+    });
   }
 
   // componentWillUnmount() {
   //   window.removeEventListener('click', this.handleWindowClick);
   // }
+
+  resetThenSet = id => {
+    let temp = this.state.positions;
+    // console.log('temp', temp);
+    temp.forEach(item => (item.selected = false));
+    // console.log('temp.1', temp[0]);
+    temp[Number(id) - 1].selected = true;
+    this.setState({
+      positions: temp,
+    });
+  };
 
   handleWindowClick = e => {
     const isTargetInsideContainer = this.containerRef.current.contains(
@@ -123,6 +142,7 @@ class App extends Component {
       email,
       phone,
       position_id,
+      positions,
       photo,
       usersListHeigthDisabled,
     } = this.state;
@@ -153,6 +173,9 @@ class App extends Component {
             handleChange={this.handleChange}
             handleFileInput={this.handleFileInput}
             enable={enable}
+            currentPosition={positions[0].name}
+            resetThenSet={this.resetThenSet}
+            positions={positions}
           />
         </main>
         <Footer />
