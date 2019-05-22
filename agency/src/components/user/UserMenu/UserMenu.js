@@ -79,7 +79,9 @@ export default class UserMenu extends Component {
         ref={this.containerRef}
       >
         <div className={s.userNameWrap}>
-          <span className={s.name}>{name}</span>
+          <span className={s.name}>
+          {name}
+          </span>
           <span className={s.mail}> {email} </span>
         </div>
         <a className={s.userLink} href="#">

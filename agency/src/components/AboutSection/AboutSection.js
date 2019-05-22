@@ -1,6 +1,14 @@
 import React from 'react';
 import styles from './AboutSection.module.scss';
+import AboutSectionText from '../../languages/en/AboutSection';
 import { ReactComponent as ManSvg } from '../../assets/img/man-mobile.svg';
+
+const charactersMaxlimit = {
+  mainTitle: 75,
+  secondTitle: 75,
+  firstParagraph: 390,
+  secondParagraph: 390,
+};
 
 const SectionImg = () => (
   <div>
@@ -10,25 +18,46 @@ const SectionImg = () => (
 
 const AboutSection = () => (
   <section className={styles.aboutSection} id="about">
-    <h2 className={styles.title}>Let's get acquainted</h2>
+    <h2 className={styles.title}>
+      {AboutSectionText.mainTitle.length > charactersMaxlimit.mainTitle
+        ? AboutSectionText.mainTitle.substring(
+            0,
+            charactersMaxlimit.mainTitle - 3,
+          ) + '...'
+        : AboutSectionText.mainTitle}
+    </h2>
     <div className={styles.container}>
       <div className={styles.imgWrap}>
         <SectionImg />
       </div>
-      <div className={styles.contantWrap}>
-        <h3 className={styles.secTitle}>I am cool frontend developer</h3>
+      <div className={styles.contentWrap}>
+        <h3 className={styles.secTitle}>
+          {AboutSectionText.secondTitle.length > charactersMaxlimit.secondTitle
+            ? AboutSectionText.secondTitle.substring(
+                0,
+                charactersMaxlimit.secondTitle - 3,
+              ) + '...'
+            : AboutSectionText.secondTitle}
+        </h3>
         <p className={styles.content}>
-          When real users have a slow experience on mobile, they're much less
-          likely to find what they are looking for or purchase from you in the
-          future. For many sites this equates to a huge missed opportunity,
-          especially when more than half of visits are abandoned if a mobile
-          page takes over 3 seconds to load.
+          {AboutSectionText.firstParagraph.length >
+          charactersMaxlimit.firstParagraph
+            ? AboutSectionText.firstParagraph.substring(
+                0,
+                charactersMaxlimit.firstParagraph - 3,
+              ) + '...'
+            : AboutSectionText.firstParagraph}
         </p>
         <p className={styles.content}>
-          Last week, Google Search and Ads teams announced two new speed
-          initiatives to help improve user-experience on the web.
+          {AboutSectionText.secondParagraph.length >
+          charactersMaxlimit.secondParagraph
+            ? AboutSectionText.secondParagraph.substring(
+                0,
+                charactersMaxlimit.secondParagraph - 3,
+              ) + '...'
+            : AboutSectionText.secondParagraph}
         </p>
-        <a href="#signup"  className={styles.button}>
+        <a href="#signup" className={styles.button}>
           Sign Up
         </a>
       </div>

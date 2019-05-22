@@ -14,12 +14,19 @@
 
 .section {
   width: 100%;
-  background-image: url(../../assets/img/bg-1.jpg);
+  background-image: url(../../assets/img/bg-1-t.jpg);
   background-size: 203%;
   background-position: rem(-128) rem(-11);
   background-repeat: no-repeat;
   padding-top: rem(44);
   padding-bottom: rem(71);
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    background-image: url(../../assets/img/bg-1-t@2x.jpg);
+    background-size: 203%;
+    background-position: rem(-128) rem(-11);
+
+  }
+
   @media screen and (min-width: 768px) {
     padding-top: rem(85);
     padding-bottom: rem(122);
@@ -27,15 +34,27 @@
     background-position: 0 0;
   }
   @media screen and (min-width: 1024px) {
+    background-image: url(../../assets/img/bg-1-d.jpg);
     padding-top: rem(104);
     padding-bottom: rem(158);
     background-size: 130%;
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      background-image: url(../../assets/img/bg-1-d@2x.jpg);
+      background-size: 130%;
+      background-position: 0 0;
+    }
   }
   @media screen and (min-width: 2560px) {
+    background-image: url(../../assets/img/bg-1-2k.jpg);
     padding-top: rem(104);
     padding-bottom: rem(143);
     background-size: 100%;
     background-position: 0 rem(-312);
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      background-image: url(../../assets/img/bg-1-2k@2x.jpg);
+      background-size: 100%;
+      background-position: 0 rem(-312);
+    }
   }
 }
 
@@ -50,7 +69,6 @@
   font-weight: 600;
   line-height: rem(34);
   overflow: hidden;
-  text-overflow: ellipsis;
   @media screen and (min-width: 768px) {
     margin-bottom: rem(11);
     max-width: rem(377);
@@ -71,7 +89,9 @@
   }
 }
 
-.content {
+.content,
+.mobileContent {
+  display: none;
   max-width: rem(290);
   max-height: rem(62);
   margin-bottom: rem(42);
@@ -81,12 +101,12 @@
   font-size: rem(16);
   font-weight: 400;
   line-height: rem(21);
-  // white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
   @media screen and (min-width: 768px) {
+    display: block;
     max-width: rem(384);
-    max-height: rem(134);
+    max-height: rem(140);
+    margin-bottom: 3.39rem;
     font-size: rem(18);
     line-height: rem(24);
     text-align: left;
@@ -104,5 +124,12 @@
     max-height: rem(146);
     font-size: rem(20);
     line-height: rem(26);
+  }
+}
+
+.mobileContent {
+  display: block;
+  @media screen and (min-width: 768px) {
+    display: none;
   }
 }

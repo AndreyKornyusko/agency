@@ -5,21 +5,20 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  // max-height: 631px;
+  max-height: 610px;
   overflow: hidden;
   padding: 0;
   @media screen and (min-width: 768px) {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    // max-height: 100000000000px;
+    max-height: none;
     margin-bottom: 21px;
   }
 
   @media screen and (min-width: 1024px) {
     justify-content: flex-start;
     margin-bottom: 47px;
-
   }
 }
 
@@ -71,7 +70,7 @@
 }
 .imgWrap {
   margin-bottom: 15px;
-  border:none;
+  border: none;
   @media screen and (min-width: 1024px) {
     margin-right: 8px;
   }
@@ -82,7 +81,7 @@
   width: rem(70);
   height: rem(70);
   background-color: #000000;
-  border:none;
+  border: none;
 }
 .contentWrap {
   @media screen and (min-width: 1024px) {
@@ -124,16 +123,19 @@
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
+  @media screen and (min-width: 768px) {
+    max-width: rem(220);
+  }
   @media screen and (min-width: 1024px) {
     text-align: left;
     margin: 0;
   }
 }
 
-
 .email {
   white-space: nowrap;
 }
 .phone {
+  white-space: nowrap;
   line-height: 26px;
 }

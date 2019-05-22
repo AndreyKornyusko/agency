@@ -1,36 +1,19 @@
 import React, { Component } from 'react';
 
 import styles from './SignUpSection.module.scss';
-import SignUpButton from '../Buttons/SignUpButton';
-import icons from '../../assets/img/icons.svg';
+import SignUpSectionText from '../../languages/en/SignUpSection';
+
 import * as API from '../../services/api';
-import SignUpForm from './SignUpForm';
+import SignUpForm from './SignUpForm/SignUpForm';
 
-const UploadSvg = ({ name }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
-    className={styles.uploadSvg}
-  >
-    <use xlinkHref={`${icons}#${name}`} />
-  </svg>
-);
-
-// const INITIAL_STATE = {
-//   name: '',
-//   email: '',
-//   position_id: '',
-//   phone: '',
-//   photo: '',
-// };
+const charactersMaxlimit = {
+  mainTitle: 55,
+  attention: 103,
+};
 
 export default class SignUpSection extends Component {
   state = {
-    // ...INITIAL_STATE,
-    positions: [],
-    // token: '',
-    // baseUrl:
-    //   'https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6',
+    positions: [{ id: 1, name: 'Select your position', selected: false }],
   };
 
   componentDidMount() {
@@ -39,36 +22,22 @@ export default class SignUpSection extends Component {
       .then(data => {
         this.setState({ positions: [...data] });
       });
-
-    // API.getToken().then(data => {
-    //   this.setState({ token: data });
-    // });
   }
 
-  // handleSubmit = e => {
-  //   e.preventDefault();
-
-  //   const { position_id, name, email, phone, photo, token } = this.state;
-  //   console.log('this.state', this.state);
-
-  //   API.PostUser(position_id, name, email, phone, photo, token);
-
-  //   this.setState({ ...INITIAL_STATE });
-
-  //   this.setState({ isDisable: false });
-  // };
-
-  // handleChange = ({ target: { name, value } }) => {
-  //   this.setState({ [name]: value });
-  // };
-
-  // handleFileInput = () => {
-  //   const fileField = document.querySelector('input[type="file"]');
-  //   this.setState({ photo: fileField.files[0] });
-  // };
+  resetThenSet = id => {
+    let temp = this.state.positions;
+    // console.log('temp', temp);
+    temp.forEach(item => (item.selected = false));
+    // console.log('temp.1', temp[0]);
+    temp[Number(id) - 1].selected = true;
+    this.setState({
+      positions: temp,
+    });
+  };
 
   render() {
     const { positions } = this.state;
+    console.log('state positions', positions);
     const {
       isDisabled,
       handleSubmit,
@@ -82,16 +51,23 @@ export default class SignUpSection extends Component {
       enable,
     } = this.props;
 
-    // const enable =
-    // position_id.length > 0 &&
-    // name.length > 0 && email.length > 0 && phone.length > 0 && photo !== '';
-
     return (
       <section className={styles.section} id="signup">
-        <h2 className={styles.title}>Register to get a work</h2>
+        <h2 className={styles.title}>
+          {SignUpSectionText.mainTitle.length > charactersMaxlimit.mainTitle
+            ? SignUpSectionText.mainTitle.substring(
+                0,
+                charactersMaxlimit.mainTitle - 3,
+              ) + '...'
+            : SignUpSectionText.mainTitle}
+        </h2>
         <span className={styles.note}>
-          Attention! After successful registration and alert, update the list of
-          users in the block from the top
+          {SignUpSectionText.attention.length > charactersMaxlimit.attention
+            ? SignUpSectionText.attention.substring(
+                0,
+                charactersMaxlimit.attention - 3,
+              ) + '...'
+            : SignUpSectionText.attention}
         </span>
         <div className={styles.container}>
           <SignUpForm
@@ -104,6 +80,9 @@ export default class SignUpSection extends Component {
             positions={positions}
             enable={enable}
             isDisabled={isDisabled}
+            positions={positions}
+            currentPosition={positions[0].name}
+            resetThenSet={this.resetThenSet}
           />
         </div>
       </section>

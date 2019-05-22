@@ -27,12 +27,15 @@
 
 .section {
   width: 100%;
-  background-image: url(../../assets/img/bg-2.jpg);
+  background-image: url(../../assets/img/bg-2-t.jpg);
   background-repeat: no-repeat;
   background-size: 482%;
   background-position: rem(-615) 0;
   padding-top: rem(69);
   padding-bottom: rem(42);
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    background: url(../../assets/img/bg-2-t@2x.jpg);
+  }
   @media screen and (min-width: 768px) {
     background-size: 171%;
     background-position: rem(-275) 0;
@@ -40,13 +43,21 @@
     padding-bottom: rem(100);
   }
   @media screen and (min-width: 1024px) {
+    background-image: url(../../assets/img/bg-2-d.jpg);
     background-size: 110%;
     background-position: 0 0;
     padding-top: rem(130);
     padding-bottom: rem(133);
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      background: url(../../assets/img/bg-2-d@2x.jpg);
+    }
   }
   @media screen and (min-width: 2560px) {
+    background-image: url(../../assets/img/bg-2-2k.jpg);
     padding-bottom: rem(73);
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      background: url(../../assets/img/bg-2-2k@2x.jpg);
+    }
   }
 }
 
@@ -106,7 +117,7 @@
     width: 47.91666666%;
   }
   @media screen and (min-width: 1024px) {
-  width: 48.916667%;
+    width: 48.916667%;
   }
   @media screen and (min-width: 2560px) {
     margin-right: rem(92);

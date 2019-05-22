@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 
+import style from './styles.module.scss';
 import * as API from '../services/api';
 
 import AppHeader from './AppHeader/AppHeader';
-import style from './styles.module.scss';
 import HeadSection from '../components/HeadSection/HeadSection';
 import AboutSection from '../components/AboutSection/AboutSection';
 import RelationshipSection from '../components/RelationshipSection/RelationshipSection';
 import RequirementsSection from '../components/RequirementsSection/RequirementsSection';
-// import UsersSectionContainer from '../components/UsersSection/UsersSectionContainer';
-
-import UsersViev from '../components/UsersSection/UsersSectionViev';
-
+import UsersSection from '../components/UsersSection/UsersSectionViev';
 import SignUpSection from '../components/SignUpSection/SignUpSection';
 import Footer from '../components/Footer/Footer';
 
@@ -28,6 +25,8 @@ const INITIAL_STATE = {
 };
 
 class App extends Component {
+  // containerRef = createRef();
+
   state = {
     ...INITIAL_STATE,
     token: '',
@@ -35,9 +34,12 @@ class App extends Component {
     nextUrl: '',
 
     showButton: true,
+    usersListHeigthDisabled: false,
   };
 
   componentDidMount() {
+    // window.addEventListener('click', this.handleWindowClick);
+
     this.getUsers(this.state.baseUrl);
 
     API.getToken().then(data => {
@@ -45,15 +47,20 @@ class App extends Component {
     });
   }
 
-  // componentDidUpdate(prewProps, prewState) {
-  //   if (this.state.resetForm !== prewState.resetForm) {
-  //     this.resetForm();
-  //   }
+  // componentWillUnmount() {
+  //   window.removeEventListener('click', this.handleWindowClick);
   // }
 
-  resetForm() {
-    this.setState({ ...INITIAL_STATE });
-  }
+  handleWindowClick = e => {
+    const isTargetInsideContainer = this.containerRef.current.contains(
+      e.target,
+    );
+
+  };
+
+  // resetForm() {
+  //   this.setState({ ...INITIAL_STATE });
+  // }
 
   getUsers = url => {
     API.getUsers(url)
@@ -71,7 +78,10 @@ class App extends Component {
           API.getUsers(nextUrl)
             .then(data => data.users)
             .then(users => {
-              this.setState({ data: [...this.state.data, ...users] });
+              this.setState({
+                data: [...this.state.data, ...users],
+                usersListHeigthDisabled: true,
+              });
             });
         } else {
           this.setState(prewState => ({ showButton: !prewState.showButton }));
@@ -89,12 +99,11 @@ class App extends Component {
     API.PostUser(position_id, name, email, phone, photo, token).then(data => {
       if (data.success) {
         this.getUsers(this.state.resetPageUrl);
-        this.resetForm();
       }
     });
-    this.resetForm();
+    // this.resetForm();
 
-    // e.target.reset();
+    e.target.reset();
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -115,6 +124,7 @@ class App extends Component {
       phone,
       position_id,
       photo,
+      usersListHeigthDisabled,
     } = this.state;
     const { handleSubmit, handleChange, handleFileInput } = this.props;
 
@@ -123,15 +133,17 @@ class App extends Component {
       name.length > 0 && email.length > 0 && phone.length > 0 && photo !== '';
 
     return (
-      <div className={style.appWrap}>
+      <div className={style.appWrap}
+      //  ref={this.containerRef}
+       >
         <AppHeader />
         <main className={style.main}>
           <HeadSection />
           <AboutSection />
           <RelationshipSection />
           <RequirementsSection />
-          {/* <UsersSectionContainer /> */}
-          <UsersViev
+          <UsersSection
+            usersListHeigthDisabled={usersListHeigthDisabled}
             users={data}
             handleShowMore={this.handleShowMoreClick}
             showButton={showButton}
@@ -142,8 +154,8 @@ class App extends Component {
             handleFileInput={this.handleFileInput}
             enable={enable}
           />
-          <Footer />
         </main>
+        <Footer />
       </div>
     );
   }
