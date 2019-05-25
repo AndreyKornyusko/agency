@@ -59,3 +59,69 @@
   align-items: center;
 }
 
+.modal {
+  width: rem(290);
+  height: rem(180);
+  padding-top: 22px;
+  padding-right: 24px;
+  padding-left: 22px;
+  padding-bottom: 24px;
+  background-color: #fff;
+  z-index: 10000;
+  border-radius: 4px;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 185px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  z-index: 10000;
+  @media screen and (min-width: 1024px) {
+    padding-top: 242px;
+  }
+}
+
+.modalTitle {
+  margin: 0;
+  margin-bottom: 10px;
+  font-family: 'Overpass';
+  font-size: rem(22);
+  font-weight: 700;
+  color: #000;
+}
+
+.modalText {
+  margin: 0;
+  padding-left: 2px;
+  max-width: 219px;
+  margin-bottom: 40px;
+  font-family: 'Source Sans Pro';
+  font-size: rem(16);
+  font-weight: 400;
+  color: #000;
+  line-height: 20px;
+}
+.modalButtonWrap {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modalButton {
+  padding: 0;
+  border: none;
+  background-color: #fff;
+  font-family: 'Source Sans Pro';
+  font-size: rem(20);
+  font-weight: 700;
+  color: $primary-color;
+  text-transform: uppercase;
+  &:focus {
+    outline: none;
+  }
+}

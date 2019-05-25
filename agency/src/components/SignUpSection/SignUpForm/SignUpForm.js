@@ -27,8 +27,9 @@ const SignUpForm = ({
   photo,
   isDisabled,
   enable,
-  currentPosition,
-  resetThenSet
+  headerPosition,
+  resetThenSet,
+  isSelectReset,
 }) => (
   <form className={styles.form} onSubmit={handleSubmit} noValidate>
     <div className={styles.formWrap}>
@@ -65,7 +66,12 @@ const SignUpForm = ({
         </label>
       </div>
       <div className={styles.selectWrap}>
-        <Select positions={positions} currentPosition={currentPosition} resetThenSet={resetThenSet}/>
+        <Select
+          positions={positions}
+          headerPosition={headerPosition}
+          resetThenSet={resetThenSet}
+          isSelectReset={isSelectReset}
+        />
         {/* <select
           name="position_id"
           className={styles.select}

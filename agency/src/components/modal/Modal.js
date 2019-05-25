@@ -22,14 +22,14 @@ export default class Modal extends Component {
   };
 
   render() {
-    const { modalClass, modalBackdrop } = this.props;
+    const { modalClass, modalBackdrop,children } = this.props;
     return (
       <div
         className={`${modalBackdrop}`}
         ref={this.backdropRef}
         onClick={this.handleBackdropClick}
       >
-        <div className={`${modalClass}`}>{this.props.children}</div>
+        <div className={`${modalClass}`}>{children}</div>
       </div>
     );
   }

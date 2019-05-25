@@ -16,7 +16,9 @@ const INITIAL_STATE = {
   name: '',
   email: '',
   position_id: 1,
-  positions: [{ id: 1, name: 'Select your position', selected: false }],
+  positions: [{ id: 0, name: '', selected: false }],
+  isSelectReset: true,
+  isModalOpen: false,
 
   phone: '',
   photo: '',
@@ -49,10 +51,10 @@ class App extends Component {
     });
 
     API.getPositions()
-    .then(data => data.positions)
-    .then(data => {
-      this.setState({ positions: [...data] });
-    });
+      .then(data => data.positions)
+      .then(data => {
+        this.setState({ positions: [...data] });
+      });
   }
 
   // componentWillUnmount() {
@@ -61,25 +63,25 @@ class App extends Component {
 
   resetThenSet = id => {
     let temp = this.state.positions;
-    // console.log('temp', temp);
+    console.log('temp', temp);
     temp.forEach(item => (item.selected = false));
     // console.log('temp.1', temp[0]);
     temp[Number(id) - 1].selected = true;
     this.setState({
       positions: temp,
+      position_id: id,
     });
   };
 
-  handleWindowClick = e => {
-    const isTargetInsideContainer = this.containerRef.current.contains(
-      e.target,
-    );
+  // handleWindowClick = e => {
+  //   const isTargetInsideContainer = this.containerRef.current.contains(
+  //     e.target,
+  //   );
+  // };
 
-  };
-
-  // resetForm() {
-  //   this.setState({ ...INITIAL_STATE });
-  // }
+  resetForm() {
+    this.setState({ positions: [{ name: '' }] });
+  }
 
   getUsers = url => {
     API.getUsers(url)
@@ -113,16 +115,17 @@ class App extends Component {
     e.preventDefault();
 
     const { position_id, name, email, phone, photo, token } = this.state;
-    console.log('this.state', this.state);
+    // console.log('this.state', this.state);
 
     API.PostUser(position_id, name, email, phone, photo, token).then(data => {
       if (data.success) {
         this.getUsers(this.state.resetPageUrl);
       }
     });
-    // this.resetForm();
 
     e.target.reset();
+    this.setState({ isModalOpen: true });
+    this.resetForm();
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -133,6 +136,8 @@ class App extends Component {
     const fileField = document.querySelector('input[type="file"]');
     this.setState({ photo: fileField.files[0] });
   };
+
+  closeModal =()=> this.setState({ isModalOpen: false })
 
   render() {
     const {
@@ -145,21 +150,22 @@ class App extends Component {
       positions,
       photo,
       usersListHeigthDisabled,
+      isSelectReset,
+      isModalOpen
     } = this.state;
     const { handleSubmit, handleChange, handleFileInput } = this.props;
-
+    const selectHeaderPosition = positions[0].name;
     const enable =
       // position_id.length > 0 &&
       name.length > 0 && email.length > 0 && phone.length > 0 && photo !== '';
 
     return (
-      <div className={style.appWrap}
-      //  ref={this.containerRef}
-       >
+      <div
+        className={style.appWrap}
+        //  ref={this.containerRef}
+      >
         <AppHeader />
         <main className={style.main}>
-          <HeadSection />
-          <AboutSection />
           <RelationshipSection />
           <RequirementsSection />
           <UsersSection
@@ -173,9 +179,12 @@ class App extends Component {
             handleChange={this.handleChange}
             handleFileInput={this.handleFileInput}
             enable={enable}
-            currentPosition={positions[0].name}
+            headerPosition={selectHeaderPosition}
             resetThenSet={this.resetThenSet}
             positions={positions}
+            isSelectReset={isSelectReset}
+            isModalOpen={isModalOpen}
+            onCloseModal={this.closeModal}
           />
         </main>
         <Footer />

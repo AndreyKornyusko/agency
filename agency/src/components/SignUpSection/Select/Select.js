@@ -1,20 +1,66 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 
 import s from './Select.module.scss';
+import icons from '../../../assets/img/icons.svg';
+
+const SelectArrow = ({ name }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+    className={s.caretDownSvg}
+  >
+    <use xlinkHref={`${icons}#${name}`} />
+  </svg>
+);
 
 export default class Select extends Component {
-  constructor(props) {
-    super(props);
+  containerRef = createRef();
 
-    this.state = {
-      listOpen: false,
-      headerPosition: this.props.currentPosition,
-    };
+  static defaultProps = {
+    isSelectReset: true,
+    headerPosition: 'Select your position',
+  };
+
+  state = {
+    listOpen: false,
+    headerPosition: this.props.headerPosition,
+    isSelectReset: this.props.isSelectReset,
+  };
+
+  componentDidMount() {
+    window.addEventListener('click', this.handleWindowClick);
+
+    this.showReset();
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { listOpen } = this.state;
+
+    return nextState.listOpen !== listOpen;
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', this.handleWindowClick);
+  }
+
+  handleWindowClick = e => {
+    const isTargetInsideContainer = this.containerRef.current.contains(
+      e.target,
+    );
+    const { listOpen } = this.state;
+    if (listOpen && !isTargetInsideContainer) {
+      this.toggleList();
+    }
+  };
+
+  showReset = () => {
+    console.log('select state isSelectReset', this.state.isSelectReset);
+  };
 
   SelectItem = (position, id) => {
     this.setState(
       {
+        // isSelectReset: true,
         listOpen: false,
         headerPosition: position,
       },
@@ -27,13 +73,19 @@ export default class Select extends Component {
   };
 
   render() {
-    const { headerPosition, listOpen } = this.state;
+    const { headerPosition, listOpen, isSelectReset } = this.state;
     const { positions, resetThenSet } = this.props;
 
     return (
-      <div className={s.select}>
+      <div className={s.select} ref={this.containerRef}>
         <div className={s.selectHeader} onClick={this.toggleList}>
-          {headerPosition}
+          <span className={s.selectHeaderPosition}>
+            {headerPosition || 'Select your position'}
+            {/* {isSelectReset ? headerPosition : 'Select your position'} */}
+          </span>
+          <div className={s.caretWrap}>
+            <SelectArrow name="icon-caret-down" />
+          </div>
         </div>
         {listOpen && (
           <ul className={s.selectDropdown} onClick={e => e.stopPropagation()}>

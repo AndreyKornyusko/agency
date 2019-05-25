@@ -5,6 +5,8 @@ import SignUpSectionText from '../../languages/en/SignUpSection';
 
 import * as API from '../../services/api';
 import SignUpForm from './SignUpForm/SignUpForm';
+import Modal from '../modal/Modal';
+import modalStyles from '../modal/modal.module.scss';
 
 const charactersMaxlimit = {
   mainTitle: 55,
@@ -12,9 +14,10 @@ const charactersMaxlimit = {
 };
 
 export default class SignUpSection extends Component {
-  // state = {
-  //   positions: [{ id: 1, name: 'Select your position', selected: false }],
-  // };
+  state = {
+    // isModalOpen: false,
+    // positions: [{ id: 1, name: 'Select your position', selected: false }],
+  };
 
   componentDidMount() {
     // API.getPositions()
@@ -35,9 +38,12 @@ export default class SignUpSection extends Component {
   //   });
   // };
 
+  // openModal = () => this.setState({ isModalOpen: true });
+  closeModal = () => this.props.onCloseModal;
+
   render() {
-    // const { positions } = this.state;
-    // console.log('state positions', positions);
+    // const { isModalOpen } = this.state;
+
     const {
       isDisabled,
       handleSubmit,
@@ -51,7 +57,10 @@ export default class SignUpSection extends Component {
       photo,
       enable,
       resetThenSet,
-      currentPosition
+      headerPosition,
+      isSelectReset,
+      isModalOpen,
+      onCloseModal,
     } = this.props;
 
     return (
@@ -84,13 +93,29 @@ export default class SignUpSection extends Component {
             enable={enable}
             isDisabled={isDisabled}
             // currentPosition={positions[0].name}
-            currentPosition={currentPosition}
-
+            headerPosition={headerPosition}
             // resetThenSet={this.resetThenSet}
             resetThenSet={resetThenSet}
-
+            isSelectReset={isSelectReset}
           />
         </div>
+        {isModalOpen && (
+          <Modal
+            onClose={onCloseModal}
+            modalBackdrop={styles.backdrop}
+            modalClass={styles.modal}
+          >
+            <div className={styles.modalWrap}>
+              <h3 className={styles.modalTitle}>Congratulations</h3>
+              <p className={styles.modalText}>
+                You have successfully passed the registration
+              </p>
+              <div className={styles.modalButtonWrap}>
+                <button className={styles.modalButton} onClick={onCloseModal}>ok</button>
+              </div>
+            </div>
+          </Modal>
+        )}
       </section>
     );
   }

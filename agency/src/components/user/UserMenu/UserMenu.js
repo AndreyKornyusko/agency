@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 import icons from '../../../assets/img/icons.svg';
 
 import Modal from '../../modal/Modal';
@@ -35,9 +35,9 @@ const MenuSvg = ({ name }) => (
   </div>
 );
 
-const userId={
-  id:'1'
-}
+const userId = {
+  id: '1',
+};
 
 export default class UserMenu extends Component {
   state = {
@@ -46,10 +46,10 @@ export default class UserMenu extends Component {
     name: '',
     email: '',
     photo: '',
-    phone:'',
-    id:'',
-    position:'',
-    position_id:'',
+    phone: '',
+    id: '',
+    position: '',
+    position_id: '',
   };
 
   openModal = () => this.setState({ isModalOpen: true });
@@ -60,12 +60,10 @@ export default class UserMenu extends Component {
       .then(userData => userData.user)
       .then(userData => {
         this.setState({ ...userData });
-        // console.log('state', this.state);
       });
   };
 
   componentDidMount() {
-
     this.getUser(userId.id);
   }
 
@@ -73,32 +71,26 @@ export default class UserMenu extends Component {
     const { isModalOpen, name, email, photo } = this.state;
 
     return (
-      <div
-        className={s.container}
-        onClick={this.openDropdown}
-        ref={this.containerRef}
-      >
+      <div className={s.container}>
         <div className={s.userNameWrap}>
-          <span className={s.name}>
-          {name}
-          </span>
+          <span className={s.name}>{name}</span>
           <span className={s.mail}> {email} </span>
         </div>
         <a className={s.userLink} href="#">
           <Avatar image={photo} avatarClass={avatarStyles.avatar} />
         </a>
-
+ 
         <button className={s.signoutButton}>
           <SignoutSvg name="icon-sign-out" />
         </button>
         <button className={s.openModal} onClick={this.openModal}>
           <MenuSvg name="icon-line-menu" />
-        </button>
+        </button> 
         {isModalOpen && (
           <Modal
             onClose={this.closeModal}
             modalBackdrop={modalStyles.backdrop}
-            modalClass={modalStyles.modal}
+            modalClass={modalStyles.modal} 
           >
             <div className={s.modal}>
               <div className={s.dropdownUserWrap}>

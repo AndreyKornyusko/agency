@@ -17,7 +17,6 @@
   padding: 0;
 }
 
-
 .header {
   width: 100%;
   min-height: rem(64);
@@ -48,15 +47,11 @@
   @media screen and (min-width: 1024px) {
     display: flex;
     justify-content: center;
-    margin-right: rem(52);
   }
   @media screen and (min-width: 2560px) {
-    margin-right: rem(25);
-
+    padding-left: rem(23);
   }
 }
-
-
 
 .link {
   text-decoration: none;
@@ -76,7 +71,4 @@
   line-height: 63px;
   margin-right: rem(15);
   margin-left: rem(15);
-
 }
-
-
