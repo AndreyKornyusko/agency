@@ -200,7 +200,7 @@ input[type='file'] {
   height: rem(56);
   border-radius: 0 4px 4px 0;
   border: 2px solid $primary-button-color;
-  z-index: 10;
+  z-index: 2;
   @media screen and (min-width: 768px) {
     width: rem(130);
   }

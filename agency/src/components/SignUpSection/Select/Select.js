@@ -17,20 +17,20 @@ export default class Select extends Component {
   containerRef = createRef();
 
   static defaultProps = {
-    isSelectReset: true,
+    // isSelectReset: true,
     headerPosition: 'Select your position',
   };
 
   state = {
     listOpen: false,
     headerPosition: this.props.headerPosition,
-    isSelectReset: this.props.isSelectReset,
+    // isSelectReset: this.props.isSelectReset,
   };
 
   componentDidMount() {
     window.addEventListener('click', this.handleWindowClick);
 
-    this.showReset();
+    // this.showReset();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -53,9 +53,9 @@ export default class Select extends Component {
     }
   };
 
-  showReset = () => {
-    console.log('select state isSelectReset', this.state.isSelectReset);
-  };
+  // showReset = () => {
+  //   console.log('select state isSelectReset', this.state.isSelectReset);
+  // };
 
   SelectItem = (position, id) => {
     this.setState(
@@ -91,7 +91,9 @@ export default class Select extends Component {
           <ul className={s.selectDropdown} onClick={e => e.stopPropagation()}>
             {positions.map(item => (
               <li
-                className={s.selectDropdownItem}
+                className={
+                  item.selected ? s.selectDropdownItemSelected : s.selectDropdownItem
+                }
                 key={item.id}
                 onClick={() => this.SelectItem(item.name, item.id)}
               >

@@ -29,7 +29,6 @@ const SignUpForm = ({
   enable,
   headerPosition,
   resetThenSet,
-  isSelectReset,
 }) => (
   <form className={styles.form} onSubmit={handleSubmit} noValidate>
     <div className={styles.formWrap}>
@@ -70,19 +69,7 @@ const SignUpForm = ({
           positions={positions}
           headerPosition={headerPosition}
           resetThenSet={resetThenSet}
-          isSelectReset={isSelectReset}
         />
-        {/* <select
-          name="position_id"
-          className={styles.select}
-          onChange={handleChange}
-        >
-          {positions.map(item => (
-            <option key={item.id} value={item.id}>
-              {item.name}
-            </option>
-          ))}
-        </select> */}
         <label htmlFor="upload" className={styles.uploadLabel}>
           Upload your photo
           <span className={styles.uploadIconWrap}>

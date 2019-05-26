@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 
 import style from './styles.module.scss';
 import * as API from '../services/api';
@@ -16,7 +16,7 @@ const INITIAL_STATE = {
   name: '',
   email: '',
   position_id: 1,
-  positions: [{ id: 0, name: '', selected: false }],
+  positions: [{ id: 1, name: '', selected: false }],
   isSelectReset: true,
   isModalOpen: false,
 
@@ -29,8 +29,6 @@ const INITIAL_STATE = {
 };
 
 class App extends Component {
-  // containerRef = createRef();
-
   state = {
     ...INITIAL_STATE,
     token: '',
@@ -42,8 +40,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // window.addEventListener('click', this.handleWindowClick);
-
     this.getUsers(this.state.baseUrl);
 
     API.getToken().then(data => {
@@ -57,27 +53,16 @@ class App extends Component {
       });
   }
 
-  // componentWillUnmount() {
-  //   window.removeEventListener('click', this.handleWindowClick);
-  // }
-
   resetThenSet = id => {
     let temp = this.state.positions;
-    console.log('temp', temp);
+    // console.log('temp', temp);
     temp.forEach(item => (item.selected = false));
-    // console.log('temp.1', temp[0]);
     temp[Number(id) - 1].selected = true;
     this.setState({
       positions: temp,
       position_id: id,
     });
   };
-
-  // handleWindowClick = e => {
-  //   const isTargetInsideContainer = this.containerRef.current.contains(
-  //     e.target,
-  //   );
-  // };
 
   resetForm() {
     this.setState({ positions: [{ name: '' }] });
@@ -115,17 +100,14 @@ class App extends Component {
     e.preventDefault();
 
     const { position_id, name, email, phone, photo, token } = this.state;
-    // console.log('this.state', this.state);
 
     API.PostUser(position_id, name, email, phone, photo, token).then(data => {
       if (data.success) {
         this.getUsers(this.state.resetPageUrl);
+        this.setState({ isModalOpen: true });
       }
     });
-
     e.target.reset();
-    this.setState({ isModalOpen: true });
-    this.resetForm();
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -137,7 +119,7 @@ class App extends Component {
     this.setState({ photo: fileField.files[0] });
   };
 
-  closeModal =()=> this.setState({ isModalOpen: false })
+  closeModal = () => this.setState({ isModalOpen: false });
 
   render() {
     const {
@@ -150,22 +132,19 @@ class App extends Component {
       positions,
       photo,
       usersListHeigthDisabled,
-      isSelectReset,
-      isModalOpen
+      isModalOpen,
     } = this.state;
     const { handleSubmit, handleChange, handleFileInput } = this.props;
     const selectHeaderPosition = positions[0].name;
     const enable =
-      // position_id.length > 0 &&
       name.length > 0 && email.length > 0 && phone.length > 0 && photo !== '';
 
     return (
-      <div
-        className={style.appWrap}
-        //  ref={this.containerRef}
-      >
+      <div className={style.appWrap}>
         <AppHeader />
         <main className={style.main}>
+          <HeadSection />
+          <AboutSection />
           <RelationshipSection />
           <RequirementsSection />
           <UsersSection
@@ -182,7 +161,6 @@ class App extends Component {
             headerPosition={selectHeaderPosition}
             resetThenSet={this.resetThenSet}
             positions={positions}
-            isSelectReset={isSelectReset}
             isModalOpen={isModalOpen}
             onCloseModal={this.closeModal}
           />
