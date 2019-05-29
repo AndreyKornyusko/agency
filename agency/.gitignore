@@ -1,3 +1,9 @@
+src/*
+public/*
+build/static/css/*.map
+build/static/js/*.map
+
+
 # Logs
 logs
 *.log
@@ -70,7 +76,7 @@ typings/
 /coverage
 
 # production
-/build
+
 
 # misc
 .DS_Store
