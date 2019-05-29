@@ -2,8 +2,6 @@ import React from 'react';
 
 import styles from './Footer.module.scss';
 
-import icons from '../../assets/img/icons.svg';
-
 import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 import navItems from '../../configs/main-nav';
@@ -96,4 +94,4 @@ const Footer = () => (
   </footer>
 );
 
-export default Footer;
+export default Footer; 

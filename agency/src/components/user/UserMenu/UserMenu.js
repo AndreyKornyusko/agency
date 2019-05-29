@@ -20,7 +20,7 @@ const SignoutSvg = ({ name }) => (
     >
       <use xlinkHref={`${icons}#${name}`} />
     </svg>
-  </div>
+  </div> 
 );
 
 const MenuSvg = ({ name }) => (

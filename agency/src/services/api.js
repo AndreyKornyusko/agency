@@ -6,7 +6,6 @@ const getUsers = baseURL => {
       return response.json();
     })
     .then(function(data) {
-      // console.log('data', data);
       if (data.success) return data;
     })
     .catch(error => {
@@ -50,7 +49,6 @@ const getPositions = () => {
       return response.json();
     })
     .then(function(data) {
-      // console.log('positions', data);
       return data;
     })
     .catch(function(error) {
@@ -78,9 +76,9 @@ const PostUser = (position_id, name, email, phone, photo, token) => {
     .then(function(postData) {
       console.log('postData', postData);
       if (postData.success) {
-        return postData
+        return postData;
       } else {
-        console.log('User did not post')
+        console.log('User did not post');
       }
     })
     .catch(function(error) {
@@ -88,33 +86,4 @@ const PostUser = (position_id, name, email, phone, photo, token) => {
     });
 };
 
-axios.defaults.baseURL = 'http://localhost:3000';
-// 'https://frontend-test-assignment-api.abz.agency/api/v1';
-// const getAllUsers = () =>
-//   axios.get('/users?page=1&count=6').then(response => {
-//     response.data;
-//   });
-
-const getAllMenuItems = () =>
-  axios.get('/menu').then(response => response.data);
-
-const getMenuItemById = id =>
-  axios.get(`/menu/${id}`).then(response => response.data);
-
-const deleteMenuItem = id =>
-  axios.delete(`/menu/${id}`).then(response => response.status === 200);
-
-const addMenuItem = item =>
-  axios.post('/menu', item).then(response => response.data);
-
-export {
-  getUsers,
-  getUserById,
-  getPositions,
-  getToken,
-  PostUser,
-  getAllMenuItems,
-  getMenuItemById,
-  deleteMenuItem,
-  addMenuItem,
-};
+export { getUsers, getUserById, getPositions, getToken, PostUser };

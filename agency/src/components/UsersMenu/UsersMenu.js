@@ -15,7 +15,7 @@ const UsersMenu = ({ users, pic = '', usersListHeigthDisabled }) => (
       <li key={id} className={s.listItem}>
         <a href={href} className={s.link}>
           <div className={s.imgWrap}>
-            <img src={photo} className={s.image} />
+            <img src={photo} className={s.image} alt="User photo"/>
           </div>
           <div className={s.contentWrap}>
             <span className={s.name}>

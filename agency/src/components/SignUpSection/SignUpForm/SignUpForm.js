@@ -29,36 +29,44 @@ const SignUpForm = ({
   enable,
   headerPosition,
   resetThenSet,
+  nameValid,
+  mailValid,
+  phoneValid,
 }) => (
   <form className={styles.form} onSubmit={handleSubmit} noValidate>
     <div className={styles.formWrap}>
       <div className={styles.inputWrap}>
-        <label className={styles.nameLabel}>
+        <label className={nameValid ? styles.nameLabel : styles.nameLabelError}>
           <input
+            className={nameValid ? styles.nameInput : styles.nameInputError}
             type="text"
             name="name"
             value={name}
-            placeholder="Your name"
+            placeholder={nameValid ? 'Your name' : ''}
             required
             onChange={handleChange}
           />
         </label>
-        <label className={styles.mailLabel}>
+        <label className={mailValid ? styles.mailLabel : styles.mailLabelError}>
           <input
+            className={mailValid ? styles.mailInput : styles.mailInputError}
             type="email"
             name="email"
             value={email}
-            placeholder="Your email"
+            placeholder={mailValid ? 'Your email' : ''}
             required
             onChange={handleChange}
           />
         </label>
-        <label className={styles.phoneLabel}>
+        <label
+          className={phoneValid ? styles.phoneLabel : styles.phoneLabelError}
+        >
           <input
+            className={phoneValid ? styles.phoneInput : styles.phoneInputError}
             type="tel"
             name="phone"
             value={phone}
-            placeholder="+38 (___) ___ __ __"
+            placeholder={phoneValid ? '+38 (___) ___ __ __' : ''}
             required
             onChange={handleChange}
           />
@@ -81,7 +89,7 @@ const SignUpForm = ({
           type="file"
           id="upload"
           name="photo"
-          accept="image/*"
+          accept="image/*,image/jpeg"
           onChange={handleFileInput}
         />
       </div>

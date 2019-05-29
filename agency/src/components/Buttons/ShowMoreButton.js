@@ -1,6 +1,7 @@
 import React from 'react';
 
 import styles from './ShowMoreButton.module.scss';
+
 const style = {
   hideButton: { display: 'none' },
 };

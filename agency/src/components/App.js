@@ -15,13 +15,21 @@ import Footer from '../components/Footer/Footer';
 const INITIAL_STATE = {
   name: '',
   email: '',
-  position_id: 1,
-  positions: [{ id: 1, name: '', selected: false }],
-  isSelectReset: true,
-  isModalOpen: false,
+  position_id: 0,
+  positions: [{ id: 0, name: 'Select your position', selected: true }],
+  token: '',
 
+  nameValid: true,
+  mailValid: true,
+  phoneValid: true,
+  photoValid: false,
+  positionValid: false,
   phone: '',
   photo: '',
+  isModalOpen: false,
+
+  formValid: false,
+
   baseUrl:
     'https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6',
   resetPageUrl:
@@ -31,7 +39,6 @@ const INITIAL_STATE = {
 class App extends Component {
   state = {
     ...INITIAL_STATE,
-    token: '',
     data: [],
     nextUrl: '',
 
@@ -49,24 +56,35 @@ class App extends Component {
     API.getPositions()
       .then(data => data.positions)
       .then(data => {
-        this.setState({ positions: [...data] });
+        const initialPosition = INITIAL_STATE.positions[0];
+        this.setState({ positions: [initialPosition, ...data] });
       });
   }
 
   resetThenSet = id => {
     let temp = this.state.positions;
-    // console.log('temp', temp);
     temp.forEach(item => (item.selected = false));
-    temp[Number(id) - 1].selected = true;
-    this.setState({
-      positions: temp,
-      position_id: id,
-    });
+    temp[Number(id)].selected = true;
+    this.setState(
+      {
+        positions: temp,
+        position_id: id,
+      },
+
+      this.validatePositionId(id),
+    );
   };
 
-  resetForm() {
-    this.setState({ positions: [{ name: '' }] });
-  }
+  validatePositionId = id => {
+    if (id !== 0) {
+      this.setState(
+        {
+          positionValid: true,
+        },
+        this.validateForm,
+      );
+    }
+  };
 
   getUsers = url => {
     API.getUsers(url)
@@ -104,22 +122,91 @@ class App extends Component {
     API.PostUser(position_id, name, email, phone, photo, token).then(data => {
       if (data.success) {
         this.getUsers(this.state.resetPageUrl);
-        this.setState({ isModalOpen: true });
+        this.setState({ isModalOpen: true, formValid: false });
       }
     });
+    this.resetThenSet(0);
+
     e.target.reset();
   };
 
   handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
+    this.setState({ [name]: value }, this.validateField(name, value));
+  };
+
+  validateField = (fieldName, value) => {
+    let { nameValid, mailValid, phoneValid } = this.state;
+
+    const nameRegExpresh = /^[a-zа-яёA-ZА-ЯЁ0-9_ -]{2,60}$/;
+    const mailRegExpresh = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+    const phoneRegExpresh = /^\+380\d{9}$/;
+
+    switch (fieldName) {
+      case 'name':
+        nameValid = nameRegExpresh.test(value);
+        break;
+
+      case 'email':
+        mailValid = mailRegExpresh.test(value);
+        break;
+
+      case 'phone':
+        phoneValid = phoneRegExpresh.test(value);
+        break;
+      default:
+        break;
+    }
+
+    this.setState(
+      {
+        nameValid: nameValid,
+        mailValid: mailValid,
+        phoneValid: phoneValid,
+      },
+      this.validateForm,
+    );
+  };
+
+  validateForm = () => {
+    const {
+      nameValid,
+      mailValid,
+      phoneValid,
+      photoValid,
+      positionValid,
+    } = this.state;
+    this.setState({
+      formValid:
+        nameValid && mailValid && phoneValid && positionValid && photoValid,
+    });
   };
 
   handleFileInput = () => {
     const fileField = document.querySelector('input[type="file"]');
-    this.setState({ photo: fileField.files[0] });
+    const fileType = fileField.files[0].type;
+    const fileSize = fileField.files[0].size / 1024 / 1024;
+    if (fileType !== 'image/jpeg' || fileSize > 5) {
+      this.setState({ photoValid: false });
+      return;
+    } else {
+      this.setState(
+        { photoValid: true, photo: fileField.files[0] },
+        this.validateForm,
+      );
+    }
   };
 
-  closeModal = () => this.setState({ isModalOpen: false });
+  closeModal = () =>
+    this.setState({
+      // ...INITIAL_STATE,
+      isModalOpen: false,
+    });
+
+  getSelectedPosition = () => {
+    const { positions } = this.state;
+    const selectedPosition = positions.find(item => item.selected === true);
+    return selectedPosition.name;
+  };
 
   render() {
     const {
@@ -128,16 +215,16 @@ class App extends Component {
       name,
       email,
       phone,
-      position_id,
       positions,
       photo,
       usersListHeigthDisabled,
       isModalOpen,
+      nameValid,
+      mailValid,
+      phoneValid,
+      formValid,
     } = this.state;
-    const { handleSubmit, handleChange, handleFileInput } = this.props;
-    const selectHeaderPosition = positions[0].name;
-    const enable =
-      name.length > 0 && email.length > 0 && phone.length > 0 && photo !== '';
+    const selectHeaderPosition = this.getSelectedPosition();
 
     return (
       <div className={style.appWrap}>
@@ -157,12 +244,15 @@ class App extends Component {
             handleSubmit={this.handleSubmit}
             handleChange={this.handleChange}
             handleFileInput={this.handleFileInput}
-            enable={enable}
+            enable={formValid}
             headerPosition={selectHeaderPosition}
             resetThenSet={this.resetThenSet}
             positions={positions}
             isModalOpen={isModalOpen}
             onCloseModal={this.closeModal}
+            nameValid={nameValid}
+            mailValid={mailValid}
+            phoneValid={phoneValid}
           />
         </main>
         <Footer />

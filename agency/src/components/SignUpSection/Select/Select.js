@@ -17,20 +17,16 @@ export default class Select extends Component {
   containerRef = createRef();
 
   static defaultProps = {
-    // isSelectReset: true,
     headerPosition: 'Select your position',
   };
 
   state = {
     listOpen: false,
     headerPosition: this.props.headerPosition,
-    // isSelectReset: this.props.isSelectReset,
   };
 
   componentDidMount() {
     window.addEventListener('click', this.handleWindowClick);
-
-    // this.showReset();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -53,14 +49,9 @@ export default class Select extends Component {
     }
   };
 
-  // showReset = () => {
-  //   console.log('select state isSelectReset', this.state.isSelectReset);
-  // };
-
   SelectItem = (position, id) => {
     this.setState(
       {
-        // isSelectReset: true,
         listOpen: false,
         headerPosition: position,
       },
@@ -73,15 +64,14 @@ export default class Select extends Component {
   };
 
   render() {
-    const { headerPosition, listOpen, isSelectReset } = this.state;
+    const { headerPosition, listOpen } = this.state;
     const { positions, resetThenSet } = this.props;
 
     return (
       <div className={s.select} ref={this.containerRef}>
         <div className={s.selectHeader} onClick={this.toggleList}>
           <span className={s.selectHeaderPosition}>
-            {headerPosition || 'Select your position'}
-            {/* {isSelectReset ? headerPosition : 'Select your position'} */}
+            {headerPosition}
           </span>
           <div className={s.caretWrap}>
             <SelectArrow name="icon-caret-down" />
@@ -92,7 +82,11 @@ export default class Select extends Component {
             {positions.map(item => (
               <li
                 className={
-                  item.selected ? s.selectDropdownItemSelected : s.selectDropdownItem
+                  !item.id
+                    ? s.initialItemStyle
+                    : item.selected
+                    ? s.selectDropdownItemSelected
+                    : s.selectDropdownItem
                 }
                 key={item.id}
                 onClick={() => this.SelectItem(item.name, item.id)}

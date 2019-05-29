@@ -3,15 +3,13 @@ import React, { Component } from 'react';
 import styles from './SignUpSection.module.scss';
 import SignUpSectionText from '../../languages/en/SignUpSection';
 
-import * as API from '../../services/api';
 import SignUpForm from './SignUpForm/SignUpForm';
 import Modal from '../modal/Modal';
-import modalStyles from '../modal/modal.module.scss';
 
 const charactersMaxlimit = {
   mainTitle: 55,
   attention: 103,
-};
+}; 
 
 export default class SignUpSection extends Component {
   render() {
@@ -23,15 +21,16 @@ export default class SignUpSection extends Component {
       name,
       email,
       phone,
-      position_id,
       positions,
-      photo,
       enable,
       resetThenSet,
       headerPosition,
       isSelectReset,
       isModalOpen,
       onCloseModal,
+      nameValid,
+      mailValid,
+      phoneValid
     } = this.props;
 
     return (
@@ -66,6 +65,9 @@ export default class SignUpSection extends Component {
             headerPosition={headerPosition}
             resetThenSet={resetThenSet}
             isSelectReset={isSelectReset}
+            nameValid={nameValid}
+            mailValid={mailValid}
+            phoneValid= {phoneValid}
           />
         </div>
         {isModalOpen && (

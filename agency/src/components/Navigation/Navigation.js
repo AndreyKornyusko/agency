@@ -1,7 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-
-import styles from './Navigation.module.scss';
 
 const Navigation = ({ items = [], listClass, itemClass, linkClass }) => (
   <ul className={listClass}>

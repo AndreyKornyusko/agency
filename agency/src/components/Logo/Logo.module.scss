@@ -13,6 +13,9 @@
   height: rem(24);
   margin: 0;
   padding: 0;
+  &:hover{
+    fill: red
+  }
 }
 
 .svgWrap {

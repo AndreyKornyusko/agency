@@ -1,5 +1,4 @@
 import React, { Component, createRef } from 'react';
-import styles from './modal.module.scss';
 
 export default class Modal extends Component {
   backdropRef = createRef();
@@ -25,12 +24,12 @@ export default class Modal extends Component {
     const { modalClass, modalBackdrop,children } = this.props;
     return (
       <div
-        className={`${modalBackdrop}`}
+        className={modalBackdrop}
         ref={this.backdropRef}
         onClick={this.handleBackdropClick}
       >
-        <div className={`${modalClass}`}>{children}</div>
+        <div className={modalClass}>{children}</div>
       </div>
     );
   }
-}
+} 

@@ -39,11 +39,17 @@ select,
   border: 1px solid #b7b7b7;
 }
 
-input[type='text'],
-input[type='email'],
-input[type='tel'],
+// input[type='text'],
+// input[type='email'],
+// input[type='tel'],
 select,
-.uploadLabel {
+.uploadLabel,
+.nameInput,
+.mailInput,
+.phoneInput,
+.nameInputError,
+.mailInputError,
+.phoneInputError {
   display: block;
   position: relative;
   border-radius: 4px;
@@ -56,9 +62,15 @@ select,
   padding-left: rem(16);
 }
 
-input[type='text'],
-input[type='email'],
-input[type='tel'] {
+// input[type='text'],
+// input[type='email'],
+// input[type='tel'],
+.nameInput,
+.mailInput,
+.phoneInput,
+.nameInputError,
+.mailInputError,
+.phoneInputError {
   @media screen and (min-width: 768px) {
     width: rem(220);
   }
@@ -70,24 +82,20 @@ input[type='tel'] {
   }
 }
 
-input[type='text'],
-input[type='email'],
-input[type='tel'] {
+// input[type='text'],
+// input[type='email'],
+// input[type='tel'],
+.nameInput,
+.mailInput,
+.phoneInput {
   background-color: #fff !important;
 
-  &:active {
-    border: 2px solid #b7b7b7;
-  }
-
-  &:focus:required:invalid {
-    outline: none;
-    border: 2px solid #b7b7b7;
-  }
-
-  &:focus:valid {
+  &:focus:required {
     outline: none;
     background-color: #fff !important;
+    outline: none;
     color: #010000;
+    border: 2px solid #b7b7b7;
   }
 
   &::placeholder {
@@ -96,15 +104,24 @@ input[type='tel'] {
     font-size: 16px;
     font-weight: 400;
   }
+}
 
-  // &:required:invalid {
-  //   border: 1px solid #f44336;
-  // }
+.nameInputError,
+.mailInputError,
+.phoneInputError {
+  border: 1px solid #f44336;
+  &:focus {
+    border: 2px solid #f44336;
+    outline: none;
+  }
 }
 
 .nameLabel,
 .mailLabel,
-.phoneLabel {
+.phoneLabel,
+.nameLabelError,
+.mailLabelError,
+.phoneLabelError {
   position: relative;
   display: block;
   margin-bottom: rem(35);
@@ -116,11 +133,15 @@ input[type='tel'] {
 
 .nameLabel::before,
 .mailLabel::before,
-.phoneLabel::before {
+.phoneLabel::before,
+.nameLabelError::before,
+.nameLabelError::after,
+.mailLabelError::before,
+.mailLabelError::after,
+.phoneLabelError::before,
+.phoneLabelError::after {
   display: block;
   position: absolute;
-  top: rem(-6);
-  left: rem(15);
   padding: 0 rem(2);
   content: '';
   height: rem(12);
@@ -132,17 +153,52 @@ input[type='tel'] {
   z-index: 2;
 }
 
-.nameLabel::before {
-  content: 'Name';
+.nameLabel::before,
+.mailLabel::before,
+.phoneLabel::before,
+.nameLabelError::before,
+.mailLabelError::before,
+.phoneLabelError::before {
+  top: rem(-6);
+  left: rem(15);
 }
 
-.mailLabel::before {
-  content: 'Email';
+.nameLabelError::after,
+.mailLabelError::after,
+.phoneLabelError::after {
+  top: rem(60);
+  left: rem(15);
+  content: 'Error';
+  color: #f44336;
 }
 
-.phoneLabel::before {
-  content: 'Phone';
+.nameLabelError::before,
+.mailLabelError::before,
+.phoneLabelError::before {
+  color: #f44336;
 }
+
+.nameLabel,
+.nameLabelError {
+  &::before {
+    content: 'Name';
+  }
+}
+
+.mailLabel,
+.mailLabelError {
+  &::before {
+    content: 'Email';
+  }
+}
+
+.phoneLabel,
+.phoneLabelError {
+  &::before {
+    content: 'Phone';
+  }
+}
+
 input[type='file'] {
   display: none;
 }
@@ -226,15 +282,4 @@ input[type='file'] {
   @media screen and (min-width: 2560px) {
     width: rem(555);
   }
-}
-
-input {
-  border: 1px solid #b7b7b7;
-}
-
-input:focus:required:invalid {
-  border: 2px solid red;
-}
-input:required:valid {
-  border: 1px solid #b7b7b7;
 }

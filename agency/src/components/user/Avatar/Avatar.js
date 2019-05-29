@@ -1,5 +1,4 @@
 import React from 'react';
-import s from './Avatar.module.scss';
 
 const Avatar = ({ image = '', avatarClass }) => (
   <img
