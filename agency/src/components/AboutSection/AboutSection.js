@@ -12,7 +12,7 @@ const charactersMaxlimit = {
 
 const SectionImg = () => (
   <div>
-    <ManSvg className={styles.svg} />
+    <ManSvg className={styles.svg} /> 
   </div>
 );
 

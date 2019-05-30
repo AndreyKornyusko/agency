@@ -167,7 +167,7 @@ class App extends Component {
     );
   };
 
-  validateForm = () => {
+  validateForm = () => { 
     const {
       nameValid,
       mailValid,

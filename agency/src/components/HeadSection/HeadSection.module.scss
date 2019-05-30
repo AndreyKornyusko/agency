@@ -18,7 +18,7 @@
   background-size: 203%;
   background-position: rem(-128) rem(-11);
   background-repeat: no-repeat;
-  padding-top: rem(44);
+  padding-top: rem(64);
   padding-bottom: rem(71);
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     background-image: url(../../assets/img/bg-1-t@2x.jpg);
@@ -28,14 +28,14 @@
   }
 
   @media screen and (min-width: 768px) {
-    padding-top: rem(85);
+    padding-top: rem(111);
     padding-bottom: rem(122);
     background-size: 127%;
     background-position: 0 0;
   }
   @media screen and (min-width: 1024px) {
     background-image: url(../../assets/img/bg-1-d.jpg);
-    padding-top: rem(104);
+    padding-top: rem(135);
     padding-bottom: rem(158);
     background-size: 130%;
     @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
@@ -46,7 +46,7 @@
   }
   @media screen and (min-width: 2560px) {
     background-image: url(../../assets/img/bg-1-2k.jpg);
-    padding-top: rem(104);
+    padding-top: rem(133);
     padding-bottom: rem(143);
     background-size: 100%;
     background-position: 0 rem(-312);
@@ -60,8 +60,9 @@
 
 .title {
   max-width: rem(268);
-  max-height: rem(96);
-  margin-bottom: rem(2);
+  max-height: rem(102);
+  margin: 0;
+  margin-bottom: rem(12);
   text-align: center;
   color: $primary-light-text-color;
   font-family: 'Overpass';
@@ -70,22 +71,22 @@
   line-height: rem(34);
   overflow: hidden;
   @media screen and (min-width: 768px) {
-    margin-bottom: rem(11);
+    margin-bottom: rem(21);
     max-width: rem(377);
-    max-height: rem(141);
+    max-height: rem(150);
     font-size: rem(42);
     line-height: rem(50);
     text-align: left;
   }
   @media screen and (min-width: 1024px) {
-    margin-bottom: rem(11);
+    margin-bottom: rem(15);
     max-width: rem(450);
-    max-height: rem(166);
+    max-height: rem(180);
     font-size: rem(50);
     line-height: rem(60);
   }
   @media screen and (min-width: 2560px) {
-    margin-bottom: rem(8);
+    margin-bottom: rem(21);
   }
 }
 
@@ -93,7 +94,8 @@
 .mobileContent {
   display: none;
   max-width: rem(290);
-  max-height: rem(62);
+  max-height: rem(63);
+  margin: 0;
   margin-bottom: rem(42);
   color: $primary-light-text-color;
   font-family: 'Source Sans Pro';
@@ -105,23 +107,23 @@
   @media screen and (min-width: 768px) {
     display: block;
     max-width: rem(384);
-    max-height: rem(140);
+    max-height: rem(144);
     margin-bottom: 3.39rem;
     font-size: rem(18);
     line-height: rem(24);
     text-align: left;
   }
   @media screen and (min-width: 1024px) {
-    margin-bottom: rem(39);
+    margin-bottom: rem(47);
     max-width: rem(427);
-    max-height: rem(187);
+    max-height: rem(156);
     font-size: rem(20);
     line-height: rem(26);
   }
   @media screen and (min-width: 2560px) {
     margin-bottom: rem(33);
     max-width: rem(560);
-    max-height: rem(146);
+    max-height: rem(156);
     font-size: rem(20);
     line-height: rem(26);
   }

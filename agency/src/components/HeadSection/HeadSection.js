@@ -4,9 +4,9 @@ import HeadButton from '../Buttons/HeadButton';
 import HeadSectionText from '../../languages/en/HeadSection';
 
 const charactersMaxlimit = {
-  title: 60,
+  title: 63,
   content: 290,
-  mobileContent: 190,
+  mobileContent: 190, 
 };
 
 const HeadSection = () => (
