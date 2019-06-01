@@ -13,7 +13,7 @@ const charactersMaxlimit = {
 
 export default class SignUpSection extends Component {
   render() {
-    const {
+    const { 
       isDisabled,
       handleSubmit,
       handleChange,

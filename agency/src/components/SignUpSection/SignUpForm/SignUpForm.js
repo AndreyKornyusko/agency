@@ -64,7 +64,7 @@ const SignUpForm = ({
           <input
             className={phoneValid ? styles.phoneInput : styles.phoneInputError}
             type="tel"
-            name="phone"
+            name="phone" 
             value={phone}
             placeholder={phoneValid ? '+38 (___) ___ __ __' : ''}
             required

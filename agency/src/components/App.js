@@ -18,7 +18,6 @@ const INITIAL_STATE = {
   position_id: 0,
   positions: [{ id: 0, name: 'Select your position', selected: true }],
   token: '',
-
   nameValid: true,
   mailValid: true,
   phoneValid: true,
@@ -27,13 +26,10 @@ const INITIAL_STATE = {
   phone: '',
   photo: '',
   isModalOpen: false,
-
+  isNameInputFilled: false,
+  isMailInputFilled: false,
+  isPhoneInputFilled: false,
   formValid: false,
-
-  baseUrl:
-    'https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6',
-  resetPageUrl:
-    'https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6',
 };
 
 class App extends Component {
@@ -44,6 +40,10 @@ class App extends Component {
 
     showButton: true,
     usersListHeigthDisabled: false,
+    baseUrl:
+      'https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6',
+    resetPageUrl:
+      'https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6',
   };
 
   componentDidMount() {
@@ -144,14 +144,17 @@ class App extends Component {
     switch (fieldName) {
       case 'name':
         nameValid = nameRegExpresh.test(value);
+        this.setState({ isNameInputFilled: true });
         break;
 
       case 'email':
         mailValid = mailRegExpresh.test(value);
+        this.setState({ isMailInputFilled: true });
         break;
 
       case 'phone':
         phoneValid = phoneRegExpresh.test(value);
+        this.setState({ isPhoneInputFilled: true });
         break;
       default:
         break;
@@ -167,17 +170,27 @@ class App extends Component {
     );
   };
 
-  validateForm = () => { 
+  validateForm = () => {
     const {
       nameValid,
       mailValid,
       phoneValid,
       photoValid,
       positionValid,
+      isNameInputFilled,
+      isMailInputFilled,
+      isPhoneInputFilled,
     } = this.state;
     this.setState({
       formValid:
-        nameValid && mailValid && phoneValid && positionValid && photoValid,
+        nameValid &&
+        mailValid &&
+        phoneValid &&
+        positionValid &&
+        photoValid &&
+        isNameInputFilled &&
+        isMailInputFilled &&
+        isPhoneInputFilled,
     });
   };
 
@@ -196,11 +209,22 @@ class App extends Component {
     }
   };
 
-  closeModal = () =>
+  closeModal = () => {
     this.setState({
-      // ...INITIAL_STATE,
-      isModalOpen: false,
+      ...INITIAL_STATE,
     });
+
+    API.getToken().then(data => {
+      this.setState({ token: data });
+    });
+
+    API.getPositions()
+      .then(data => data.positions)
+      .then(data => {
+        const initialPosition = INITIAL_STATE.positions[0];
+        this.setState({ positions: [initialPosition, ...data] });
+      });
+  };
 
   getSelectedPosition = () => {
     const { positions } = this.state;

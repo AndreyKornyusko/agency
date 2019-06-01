@@ -55,7 +55,7 @@ export default class Select extends Component {
         listOpen: false,
         headerPosition: position,
       },
-      this.props.resetThenSet(id),
+      this.props.resetThenSet(id), 
     );
   };
 
