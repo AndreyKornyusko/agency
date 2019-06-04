@@ -30,6 +30,7 @@ const INITIAL_STATE = {
   isMailInputFilled: false,
   isPhoneInputFilled: false,
   formValid: false,
+  headerPosition: 'Select your position',
 };
 
 class App extends Component {
@@ -59,6 +60,16 @@ class App extends Component {
         const initialPosition = INITIAL_STATE.positions[0];
         this.setState({ positions: [initialPosition, ...data] });
       });
+
+    this.getSelectedPosition();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const prevStateHeaderPosition = prevState.headerPosition;
+    const nextStateHeaderPosition = this.state.headerPosition;
+    if (prevStateHeaderPosition !== nextStateHeaderPosition) {
+      this.getSelectedPosition();
+    }
   }
 
   resetThenSet = id => {
@@ -229,7 +240,7 @@ class App extends Component {
   getSelectedPosition = () => {
     const { positions } = this.state;
     const selectedPosition = positions.find(item => item.selected === true);
-    return selectedPosition.name;
+    this.setState({ headerPosition: selectedPosition.name });
   };
 
   render() {
@@ -247,8 +258,8 @@ class App extends Component {
       mailValid,
       phoneValid,
       formValid,
+      headerPosition,
     } = this.state;
-    const selectHeaderPosition = this.getSelectedPosition();
 
     return (
       <div className={style.appWrap}>
@@ -269,7 +280,7 @@ class App extends Component {
             handleChange={this.handleChange}
             handleFileInput={this.handleFileInput}
             enable={formValid}
-            headerPosition={selectHeaderPosition}
+            headerPosition={headerPosition}
             resetThenSet={this.resetThenSet}
             positions={positions}
             isModalOpen={isModalOpen}

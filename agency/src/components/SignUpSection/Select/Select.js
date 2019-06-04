@@ -55,7 +55,7 @@ export default class Select extends Component {
         listOpen: false,
         headerPosition: position,
       },
-      this.props.resetThenSet(id), 
+      this.props.resetThenSet(id),
     );
   };
 
@@ -70,9 +70,7 @@ export default class Select extends Component {
     return (
       <div className={s.select} ref={this.containerRef}>
         <div className={s.selectHeader} onClick={this.toggleList}>
-          <span className={s.selectHeaderPosition}>
-            {headerPosition}
-          </span>
+          <span className={s.selectHeaderPosition}>{headerPosition}</span>
           <div className={s.caretWrap}>
             <SelectArrow name="icon-caret-down" />
           </div>
