@@ -32,7 +32,7 @@ export default class Select extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     const { listOpen } = this.state;
 
-    return nextState.listOpen !== listOpen;
+    return nextState.listOpen !== listOpen; 
   }
 
   componentWillUnmount() {

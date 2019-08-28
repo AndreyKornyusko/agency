@@ -1,17 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 
 import style from './styles.module.scss';
 import * as API from '../services/api';
 
-import AppHeader from './AppHeader/AppHeader';
-import HeadSection from '../components/HeadSection/HeadSection';
-import AboutSection from '../components/AboutSection/AboutSection';
-import RelationshipSection from '../components/RelationshipSection/RelationshipSection';
-import RequirementsSection from '../components/RequirementsSection/RequirementsSection';
-import UsersSection from '../components/UsersSection/UsersSectionViev';
-import SignUpSection from '../components/SignUpSection/SignUpSection';
-import Footer from '../components/Footer/Footer';
-
+const AppHeader = lazy(() =>
+  import('./AppHeader/AppHeader' /* webpackChunkName: "AppHeader" */),
+);
+const HeadSection = lazy(() =>
+  import('../components/HeadSection/HeadSection' /* webpackChunkName: "HeadSection" */),
+);
+const AboutSection = lazy(() =>
+  import('../components/AboutSection/AboutSection' /* webpackChunkName: "AboutSection" */),
+);
+const RelationshipSection = lazy(() =>
+  import('../components/RelationshipSection/RelationshipSection' /* webpackChunkName: "RelationshipSection" */),
+);
+const RequirementsSection = lazy(() =>
+  import('../components/RequirementsSection/RequirementsSection' /* webpackChunkName: "RequirementsSection" */),
+);
+const UsersSection = lazy(() =>
+  import('../components/UsersSection/UsersSectionViev' /* webpackChunkName: "UsersSection" */),
+);
+const SignUpSection = lazy(() =>
+  import('../components/SignUpSection/SignUpSection' /* webpackChunkName: "SignUpSection" */),
+);
+const Footer = lazy(() =>
+  import('../components/Footer/Footer' /* webpackChunkName: "Footer" */),
+);
 const INITIAL_STATE = {
   name: '',
   email: '',
@@ -262,6 +277,7 @@ class App extends Component {
     } = this.state;
 
     return (
+      <Suspense fallback="Loading...">
       <div className={style.appWrap}>
         <AppHeader />
         <main className={style.main}>
@@ -292,6 +308,7 @@ class App extends Component {
         </main>
         <Footer />
       </div>
+      </Suspense>
     );
   }
 }
