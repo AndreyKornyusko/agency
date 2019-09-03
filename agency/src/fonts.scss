@@ -1,5 +1,6 @@
 @font-face {
   font-family: 'Overpass';
+  font-display: auto;
   font-style: bold;
   font-weight: 600;
   src: local('Overpass'),
@@ -8,6 +9,7 @@
 
 @font-face {
   font-family: 'Source Sans Pro';
+  font-display: auto;
   font-style: normal;
   font-weight: 400;
   src: local('Source Sans Pro'),
@@ -17,9 +19,19 @@
 
 @font-face {
   font-family: 'Source Sans Pro';
+  font-display: auto;
   font-style: bold;
   font-weight: 700;
   src: local('Source Sans Pro'),
     url('./assets/fonts/Source_Sans_Pro/SourceSansPro-Bold.ttf')
       format('truetype'); /* Safari, Android, iOS */
+}
+
+@font-face {
+  font-family: 'Kaushan Script';
+  font-display: auto;
+  font-style: normal;
+  font-weight: 400;
+  src: local('Kaushan Script'),
+    url('./assets/fonts/Kaushan/KaushanScript-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
 }

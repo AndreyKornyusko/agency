@@ -7,25 +7,25 @@ const AppHeader = lazy(() =>
   import('./AppHeader/AppHeader' /* webpackChunkName: "AppHeader" */),
 );
 const HeadSection = lazy(() =>
-  import('../components/HeadSection/HeadSection' /* webpackChunkName: "HeadSection" */),
+  import('./HeadSection/HeadSection' /* webpackChunkName: "HeadSection" */),
 );
 const AboutSection = lazy(() =>
-  import('../components/AboutSection/AboutSection' /* webpackChunkName: "AboutSection" */),
+  import('./AboutSection/AboutSection' /* webpackChunkName: "AboutSection" */),
 );
 const RelationshipSection = lazy(() =>
-  import('../components/RelationshipSection/RelationshipSection' /* webpackChunkName: "RelationshipSection" */),
+  import('./RelationshipSection/RelationshipSection' /* webpackChunkName: "RelationshipSection" */),
 );
 const RequirementsSection = lazy(() =>
-  import('../components/RequirementsSection/RequirementsSection' /* webpackChunkName: "RequirementsSection" */),
+  import('./RequirementsSection/RequirementsSection' /* webpackChunkName: "RequirementsSection" */),
 );
 const UsersSection = lazy(() =>
-  import('../components/UsersSection/UsersSectionViev' /* webpackChunkName: "UsersSection" */),
+  import('./UsersSection/UsersSectionViev' /* webpackChunkName: "UsersSection" */),
 );
 const SignUpSection = lazy(() =>
-  import('../components/SignUpSection/SignUpSection' /* webpackChunkName: "SignUpSection" */),
+  import('./SignUpSection/SignUpSection' /* webpackChunkName: "SignUpSection" */),
 );
 const Footer = lazy(() =>
-  import('../components/Footer/Footer' /* webpackChunkName: "Footer" */),
+  import('./Footer/Footer' /* webpackChunkName: "Footer" */),
 );
 const INITIAL_STATE = {
   name: '',
@@ -41,6 +41,7 @@ const INITIAL_STATE = {
   phone: '',
   photo: '',
   isModalOpen: false,
+  isMenuOpen: false,
   isNameInputFilled: false,
   isMailInputFilled: false,
   isPhoneInputFilled: false,
@@ -52,7 +53,7 @@ class App extends Component {
   state = {
     ...INITIAL_STATE,
     data: [],
-    nextUrl: '',
+    // nextUrl: '',
 
     showButton: true,
     usersListHeigthDisabled: false,
@@ -188,9 +189,9 @@ class App extends Component {
 
     this.setState(
       {
-        nameValid: nameValid,
-        mailValid: mailValid,
-        phoneValid: phoneValid,
+        nameValid,
+        mailValid,
+        phoneValid,
       },
       this.validateForm,
     );
@@ -239,7 +240,7 @@ class App extends Component {
     this.setState({
       ...INITIAL_STATE,
     });
-
+ 
     API.getToken().then(data => {
       this.setState({ token: data });
     });
@@ -258,6 +259,9 @@ class App extends Component {
     this.setState({ headerPosition: selectedPosition.name });
   };
 
+  openMenu = () => this.setState({ isMenuOpen: true });
+  closeMenu = () => this.setState({ isMenuOpen: false });
+
   render() {
     const {
       data,
@@ -269,6 +273,7 @@ class App extends Component {
       photo,
       usersListHeigthDisabled,
       isModalOpen,
+      isMenuOpen,
       nameValid,
       mailValid,
       phoneValid,
@@ -278,36 +283,42 @@ class App extends Component {
 
     return (
       <Suspense fallback="Loading...">
-      <div className={style.appWrap}>
-        <AppHeader />
-        <main className={style.main}>
-          <HeadSection />
-          <AboutSection />
-          <RelationshipSection />
-          <RequirementsSection />
-          <UsersSection
-            usersListHeigthDisabled={usersListHeigthDisabled}
-            users={data}
-            handleShowMore={this.handleShowMoreClick}
-            showButton={showButton}
+        <div className={style.appWrap}>
+          <AppHeader
+          handleClick={this.closeMenu}
+          closeMenu={this.closeMenu}
+          openMenu={this.openMenu}
+          isMenuOpen={isMenuOpen}
           />
-          <SignUpSection
-            handleSubmit={this.handleSubmit}
-            handleChange={this.handleChange}
-            handleFileInput={this.handleFileInput}
-            enable={formValid}
-            headerPosition={headerPosition}
-            resetThenSet={this.resetThenSet}
-            positions={positions}
-            isModalOpen={isModalOpen}
-            onCloseModal={this.closeModal}
-            nameValid={nameValid}
-            mailValid={mailValid}
-            phoneValid={phoneValid}
-          />
-        </main>
-        <Footer />
-      </div>
+          <main className={style.main}>
+            <HeadSection 
+            />
+            <AboutSection />
+            <RelationshipSection />
+            <RequirementsSection />
+            <UsersSection
+              usersListHeigthDisabled={usersListHeigthDisabled}
+              users={data}
+              handleShowMore={this.handleShowMoreClick}
+              showButton={showButton}
+            />
+            <SignUpSection
+              handleSubmit={this.handleSubmit}
+              handleChange={this.handleChange}
+              handleFileInput={this.handleFileInput}
+              enable={formValid}
+              headerPosition={headerPosition}
+              resetThenSet={this.resetThenSet}
+              positions={positions}
+              isModalOpen={isModalOpen}
+              onCloseModal={this.closeModal}
+              nameValid={nameValid}
+              mailValid={mailValid}
+              phoneValid={phoneValid}
+            />
+          </main>
+          <Footer />
+        </div>
       </Suspense>
     );
   }

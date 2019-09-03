@@ -4,6 +4,7 @@ import icons from '../../../assets/img/icons.svg';
 import Modal from '../../modal/Modal';
 import Avatar from '../Avatar/Avatar';
 import Navigation from '../../Navigation/Navigation';
+import DropdownNavigation from '../../Navigation/dropdownNavigation';
 import navItems from '../../../configs/main-nav';
 
 import s from './UserMenu.module.scss';
@@ -41,7 +42,7 @@ const userId = {
 
 export default class UserMenu extends Component {
   state = {
-    isModalOpen: false,
+    isMenuOpen: false,
     usersData: {},
     name: '',
     email: '',
@@ -52,8 +53,8 @@ export default class UserMenu extends Component {
     position_id: '',
   };
 
-  openModal = () => this.setState({ isModalOpen: true });
-  closeModal = () => this.setState({ isModalOpen: false });
+  // openMenu = () => this.setState({ isMenuOpen: true });
+  // closeModal = () => this.setState({ isMenuOpen: false });
 
   getUser = id => {
     API.getUserById(id)
@@ -67,8 +68,9 @@ export default class UserMenu extends Component {
     this.getUser(userId.id);
   }
 
-  render() {
-    const { isModalOpen, name, email, photo } = this.state;
+   render() {
+    const {  name, email, photo } = this.state; 
+    const {handleClick, closeMenu,isMenuOpen, openMenu} =this.props;
 
     return (
       <div className={s.container}>
@@ -83,12 +85,12 @@ export default class UserMenu extends Component {
         <button className={s.signoutButton}>
           <SignoutSvg name="icon-sign-out" />
         </button>
-        <button className={s.openModal} onClick={this.openModal}>
+        <button className={s.openModal} onClick={openMenu}>
           <MenuSvg name="icon-line-menu" />
         </button> 
-        {isModalOpen && (
+        {isMenuOpen && (
           <Modal
-            onClose={this.closeModal}
+            onClose={closeMenu}
             modalBackdrop={modalStyles.backdrop}
             modalClass={modalStyles.modal} 
           >
@@ -103,11 +105,12 @@ export default class UserMenu extends Component {
                 </div>
               </div>
               <div className={s.navigationWrap}>
-                <Navigation
+                <DropdownNavigation
                   items={navItems}
                   listClass={s.dropdownList}
                   itemClass={s.dropdownItem}
                   linkClass={s.dropdownLink}
+                  handleClick={handleClick}
                 />
                 <button type="button" className={s.signOut}>
                   Sign Out

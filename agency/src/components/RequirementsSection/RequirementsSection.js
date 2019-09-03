@@ -17,22 +17,10 @@ const FirstManImg = () => (
   </div>
 );
 
-const charactersMaxlimit = {
-  mainTitle: 54,
-  firstParagraph: 350,
-  secondParagraph: 350,
-  thirdParagraph: 350,
-};
-
 const RequirementsSection = () => (
   <section className={styles.section} id="requirements">
     <h2 className={styles.title}>
-      {RequerementsText.mainTitle.length > charactersMaxlimit.mainTitle
-        ? RequerementsText.mainTitle.substring(
-            0,
-            charactersMaxlimit.mainTitle - 3,
-          ) + '...'
-        : RequerementsText.mainTitle}
+      {RequerementsText.mainTitle}
     </h2>
     <div className={styles.container}>
       <div className={styles.imgWrap}>
@@ -41,31 +29,13 @@ const RequirementsSection = () => (
       </div>
       <div className={styles.contentWrap}>
         <p className={styles.content}>
-          {RequerementsText.firstParagraph.length >
-          charactersMaxlimit.firstParagraph
-            ? RequerementsText.firstParagraph.substring(
-                0,
-                charactersMaxlimit.firstParagraph - 3,
-              ) + '...'
-            : RequerementsText.firstParagraph}
+          {RequerementsText.firstParagraph}
         </p>
         <p className={styles.content}>
-          {RequerementsText.secondParagraph.length >
-          charactersMaxlimit.secondParagraph
-            ? RequerementsText.secondParagraph.substring(
-                0,
-                charactersMaxlimit.secondParagraph - 3,
-              ) + '...'
-            : RequerementsText.secondParagraph}
+          {RequerementsText.secondParagraph}
         </p>
         <p className={styles.content}>
-          {RequerementsText.thirdParagraph.length >
-          charactersMaxlimit.thirdParagraph
-            ? RequerementsText.thirdParagraph.substring(
-                0,
-                charactersMaxlimit.thirdParagraph - 3,
-              ) + '...'
-            : RequerementsText.thirdParagraph}
+          {RequerementsText.thirdParagraph}
         </p>
       </div>
     </div>

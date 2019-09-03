@@ -33,11 +33,15 @@
 
 .logo {
   cursor: pointer;
-  width: rem(134);
+  // width: rem(134);
   height: rem(24);
   margin: 0;
   padding: 0;
   fill: #fff;
+  font-family: 'Kaushan Script', cursive;
+  font-size: 24px;
+  text-decoration: none;
+  color: #fff!important;
 }
 
 .navList {
@@ -209,10 +213,10 @@
   }
 }
 
-.iconMenuIcon {
+.networks .iconMenuIcon {
   width: rem(26);
   height: rem(26);
-  
+  fill: red!important;
   &:hover {
     fill: $primary-color;
   }

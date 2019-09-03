@@ -5,11 +5,12 @@
   flex-grow: 2;
   margin: 0;
   padding: 0;
+  text-decoration: none;
 }
 
 .icon {
   cursor: pointer;
-  width: rem(134);
+  // width: rem(134);
   height: rem(24);
   margin: 0;
   padding: 0;
@@ -19,10 +20,13 @@
 }
 
 .svgWrap {
-  width: rem(134);
+  // width: rem(134);
   height: rem(24);
   margin: 0;
   padding: 0;
-
+  font-family: 'Kaushan Script', cursive;
+  font-size: 24px;
+  text-decoration: none;
+  color: $secondary-color;
 }
 

@@ -6,11 +6,6 @@ import SignUpSectionText from '../../languages/en/SignUpSection';
 import SignUpForm from './SignUpForm/SignUpForm';
 import Modal from '../modal/Modal';
 
-const charactersMaxlimit = {
-  mainTitle: 55,
-  attention: 103,
-}; 
-
 export default class SignUpSection extends Component {
   render() {
     const { 
@@ -36,20 +31,10 @@ export default class SignUpSection extends Component {
     return (
       <section className={styles.section} id="signup">
         <h2 className={styles.title}>
-          {SignUpSectionText.mainTitle.length > charactersMaxlimit.mainTitle
-            ? SignUpSectionText.mainTitle.substring(
-                0,
-                charactersMaxlimit.mainTitle - 3,
-              ) + '...'
-            : SignUpSectionText.mainTitle}
+          {SignUpSectionText.mainTitle}
         </h2>
         <span className={styles.note}>
-          {SignUpSectionText.attention.length > charactersMaxlimit.attention
-            ? SignUpSectionText.attention.substring(
-                0,
-                charactersMaxlimit.attention - 3,
-              ) + '...'
-            : SignUpSectionText.attention}
+          {SignUpSectionText.attention}
         </span>
         <div className={styles.container}>
           <SignUpForm

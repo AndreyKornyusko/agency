@@ -7,7 +7,7 @@ const Navigation = ({ items = [], listClass, itemClass, linkClass }) => (
         <a href={item.path} className={linkClass}>
           {item.name}
         </a>
-      </li> 
+      </li>
     ))}
   </ul>
 );
